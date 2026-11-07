@@ -1188,19 +1188,31 @@
 
   /* ------------------------------------------------------------------
      2b. Il cielo: alba ed eclissi
-     Alla prima visita lo schermo parte di notte: si disegna l'emblema
-     (il sole di Apollo dentro la falce di Artemide), il sole si riempie
-     d'oro e dal centro si apre un anello di luce che scopre la pagina,
-     come un'alba.
+     Alla prima visita lo schermo parte di notte: si disegna il logo dello
+     studio (la A d'oro e d'argento, il sole, i puntini e la falce di luna),
+     poi dal centro si apre un anello di luce che scopre la pagina, come
+     un'alba.
      Passando da una sezione all'altra (menu e link interni) un disco di
      notte bordato d'oro si allarga dal punto cliccato e copre lo schermo;
      sotto, la pagina si sposta; poi si apre un foro di luce che rivela
      la nuova sezione, come la fine di un'eclissi.
      ------------------------------------------------------------------ */
-  const EMBLEMA =
-    '<circle class="emblema-sole" cx="26" cy="32" r="10" pathLength="1"/>' +
-    '<path class="emblema-raggi" pathLength="1" d="M23.57 45.79L22.53 51.70M19.00 44.12L17.25 47.16M15.28 41.00L10.68 44.86M12.84 36.79L9.56 37.99M12.00 32.00L6.00 32.00M12.84 27.21L9.56 26.01M15.28 23.00L10.68 19.14M19.00 19.88L17.25 16.84M23.57 18.21L22.53 12.30"/>' +
-    '<path class="emblema-luna" pathLength="1" d="M21.75 16.19A20 20 0 1 1 21.75 47.81A17 17 0 1 0 21.75 16.19Z"/>';
+  // Il logo è disegnato una volta nella barra (index.html): qui se ne fanno le copie
+  function copiaLogo() {
+    const originale = document.querySelector(".marchio-logo");
+    if (!originale) return null;
+    const copia = originale.cloneNode(true);
+    copia.classList.remove("marchio-logo");
+    return copia;
+  }
+  function preparaLoghi() {
+    document.querySelectorAll("[data-logo]").forEach((box) => {
+      const copia = copiaLogo();
+      if (copia) box.append(copia);
+    });
+    // con meno animazioni la luce sul metallo resta ferma
+    if (menoMovimento()) document.querySelectorAll(".logo-colori animateTransform").forEach((a) => a.remove());
+  }
 
   const Cielo = (() => {
     let velo = null;
@@ -1228,11 +1240,13 @@
       velo.setAttribute("aria-hidden", "true");
       velo.innerHTML =
         '<div class="velo-corona"></div>' +
-        `<div class="velo-notte"><canvas class="velo-stelle"></canvas><svg class="velo-emblema" viewBox="2 8 56 48">${EMBLEMA}</svg></div>`;
+        '<div class="velo-notte"><canvas class="velo-stelle"></canvas><div class="velo-logo"></div></div>';
       document.body.append(velo);
       corona = velo.querySelector(".velo-corona");
       notte = velo.querySelector(".velo-notte");
-      emblema = velo.querySelector(".velo-emblema");
+      emblema = velo.querySelector(".velo-logo");
+      const logo = copiaLogo();
+      if (logo) emblema.append(logo);
       tela = velo.querySelector(".velo-stelle");
     }
 
@@ -1365,8 +1379,8 @@
         corona.style.opacity = "0";
         velo.classList.add("is-attiva", "disegna");
         togliCopertura();
-        // l'emblema si disegna mentre si caricano le opere (al massimo due secondi)
-        await Promise.all([attendi(1500), Promise.race([pronto || Promise.resolve(), attendi(2000)])]);
+        // il logo si disegna mentre si caricano le opere
+        await Promise.all([attendi(2250), Promise.race([pronto || Promise.resolve(), attendi(2500)])]);
         velo.classList.add("is-alba");
         await emblema.animate([{ transform: "none" }, { transform: "scale(1.1)" }], { duration: 420, easing: "ease-out", fill: "forwards" }).finished;
         setTimeout(via, 280);
@@ -2272,32 +2286,43 @@
   }
 
   // La voce del menu della sezione che stai guardando resta segnata dalla foglia d'oro
+  // La sezione corrente è l'ultima il cui inizio ha superato quasi metà schermo:
+  // anche sopra le fasce del tramonto e della luna resta segnata quella appena letta
   function preparaSezioneCorrente() {
-    if (!("IntersectionObserver" in window)) return;
     const link = {};
     document.querySelectorAll(".menu-lista > .menu-voce > .menu-link").forEach((a) => {
       link[a.getAttribute("href").slice(1)] = a;
     });
-    const osservatore = new IntersectionObserver(
-      (voci) => {
-        voci.forEach((v) => {
-          const a = link[v.target.id];
-          if (!a) return;
-          if (v.isIntersecting) {
-            Object.values(link).forEach((x) => x.removeAttribute("aria-current"));
-            a.setAttribute("aria-current", "location");
-          } else {
-            a.removeAttribute("aria-current");
-          }
-        });
-        segnoTorna();
-      },
-      { rootMargin: "-40% 0px -55% 0px" }
-    );
-    Object.keys(link).forEach((id) => {
-      const s = document.getElementById(id);
-      if (s) osservatore.observe(s);
-    });
+    const sezioni = Object.keys(link).map((id) => document.getElementById(id)).filter(Boolean);
+    if (!sezioni.length) return;
+    let attuale;
+    let inAttesa = false;
+    const aggiorna = () => {
+      inAttesa = false;
+      const soglia = window.innerHeight * 0.45;
+      let trovata = null;
+      sezioni.forEach((s) => {
+        if (s.getBoundingClientRect().top <= soglia) trovata = s;
+      });
+      // in fondo alla pagina vale l'ultima sezione, anche se è corta
+      const radice = document.documentElement;
+      if (trovata && window.scrollY + window.innerHeight >= radice.scrollHeight - 4) trovata = sezioni[sezioni.length - 1];
+      const id = trovata ? trovata.id : null;
+      if (id === attuale) return;
+      attuale = id;
+      Object.values(link).forEach((a) => a.removeAttribute("aria-current"));
+      if (id) link[id].setAttribute("aria-current", "location");
+      segnoTorna();
+    };
+    const chiedi = () => {
+      if (!inAttesa) {
+        inAttesa = true;
+        requestAnimationFrame(aggiorna);
+      }
+    };
+    window.addEventListener("scroll", chiedi, { passive: true });
+    window.addEventListener("resize", chiedi);
+    aggiorna();
   }
 
   /* ------------------------------------------------------------------
@@ -4130,6 +4155,7 @@
     radice.classList.add("js-pronto");
 
     // Apertura: alla prima visita l'alba, poi il nome inciso lettera per lettera
+    preparaLoghi();
     preparaNome();
     const avviaApertura = () => {
       radice.classList.add("apertura-pronta");
@@ -4199,7 +4225,7 @@
       if (b) impostaFiltro(b.dataset.categoria);
     });
 
-    // Un indirizzo come pagina.html#sculture apre già filtrato
+    // Un indirizzo come pagina.html#ceramica apre già filtrato
     const h = decodeURIComponent(location.hash.slice(1));
     if (NOMI_CATEGORIE[h]) {
       impostaFiltro(h, "nessuno");

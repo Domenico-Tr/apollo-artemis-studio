@@ -167,84 +167,80 @@
     }
   },
   {
-    "titolo": "Colonna di Delfi",
+    "titolo": "Anfora di Artemide",
     "immagine": "",
-    "categoria": "Sculture",
-    "anno": 2024,
-    "tecnica": "Marmo bianco di Carrara",
-    "misure": "h 48 cm",
-    "edizione": "",
-    "descrizione": "Una colonna ionica in scala ridotta, scolpita a mano e lucidata solo sulle volute.",
-    "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "colonna-delfi",
-    "segnaposto": {
-      "stile": "scultura",
-      "forma": "colonna",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#3A3E48",
-        "#1C1F26",
-        "#E9E5DC"
-      ]
-    }
-  },
-  {
-    "titolo": "Disco di Elio",
-    "immagine": "",
-    "categoria": "Sculture",
+    "categoria": "Ceramica",
     "anno": 2025,
-    "tecnica": "Bronzo a cera persa",
-    "misure": "ø 34 cm",
+    "tecnica": "Terracotta a figure nere",
+    "misure": "h 38 cm",
     "edizione": "",
-    "descrizione": "Il sole a sedici raggi in rilievo, fuso in fonderia artistica e patinato a caldo. Esemplare unico.",
-    "stato": "Venduta",
-    "prezzo": "",
+    "descrizione": "Tornita e dipinta con la tecnica delle figure nere: sulla pancia la falce di luna e le stelle della notte di caccia.",
+    "stato": "Disponibile",
+    "prezzo": "480 €",
     "inEvidenza": false,
-    "id": "disco-elio",
+    "id": "anfora-artemide",
     "segnaposto": {
-      "stile": "scultura",
-      "forma": "disco",
+      "stile": "anfora",
       "proporzione": [
         4,
         5
       ],
       "colori": [
-        "#E4E0D6",
-        "#B9B3A6",
-        "#000000",
-        "#9A6B2F"
+        "#E2DDD2",
+        "#C46A3A",
+        "#1B1411"
       ]
     }
   },
   {
-    "titolo": "Frammento di fregio",
+    "titolo": "Hydria di Delo",
     "immagine": "",
-    "categoria": "Sculture",
+    "categoria": "Ceramica",
     "anno": 2026,
-    "tecnica": "Gesso patinato su base in ardesia",
-    "misure": "30 × 42 cm",
+    "tecnica": "Terracotta a figure rosse",
+    "misure": "h 42 cm",
     "edizione": "",
-    "descrizione": "Una lastra spezzata con il meandro e un ramo d'alloro, come un reperto ritrovato.",
+    "descrizione": "Il vaso per l'acqua della fonte, con le figure risparmiate nel colore della terracotta e il fondo smaltato di nero: la falce di Artemide tra le stelle.",
     "stato": "Disponibile",
-    "prezzo": "",
+    "prezzo": "520 €",
     "inEvidenza": false,
-    "id": "frammento-fregio",
+    "id": "hydria-delo",
     "segnaposto": {
-      "stile": "scultura",
-      "forma": "frammento",
+      "stile": "anfora",
       "proporzione": [
         4,
         5
       ],
       "colori": [
-        "#2F3340",
-        "#151820",
-        "#E6E1D6"
+        "#E2DDD2",
+        "#1B1411",
+        "#C46A3A"
+      ]
+    }
+  },
+  {
+    "titolo": "Kylix del Sole",
+    "immagine": "",
+    "categoria": "Ceramica",
+    "anno": 2025,
+    "tecnica": "Ceramica a figure nere",
+    "misure": "ø 28 cm",
+    "edizione": "",
+    "descrizione": "Una coppa da vino come quelle dei simposi, con il sole nel tondo e il meandro intorno. Pezzo unico, adatto anche all'uso.",
+    "stato": "Disponibile",
+    "prezzo": "220 €",
+    "inEvidenza": false,
+    "id": "kylix-sole",
+    "segnaposto": {
+      "stile": "kylix",
+      "proporzione": [
+        1,
+        1
+      ],
+      "colori": [
+        "#3A3F4A",
+        "#C46A3A",
+        "#1B1411"
       ]
     }
   },
@@ -303,54 +299,84 @@
     }
   },
   {
-    "titolo": "Anfora di Artemide",
+    "titolo": "Colonna di Delfi",
     "immagine": "",
     "categoria": "Altro",
-    "anno": 2025,
-    "tecnica": "Terracotta a figure nere",
-    "misure": "h 38 cm",
+    "anno": 2024,
+    "tecnica": "Marmo bianco di Carrara",
+    "misure": "h 48 cm",
     "edizione": "",
-    "descrizione": "Tornita e dipinta con la tecnica delle figure nere: sulla pancia la falce di luna e le stelle della notte di caccia.",
+    "descrizione": "Una colonna ionica in scala ridotta, scolpita a mano e lucidata solo sulle volute.",
     "stato": "Disponibile",
-    "prezzo": "480 €",
+    "prezzo": "",
     "inEvidenza": false,
-    "id": "anfora-artemide",
+    "id": "colonna-delfi",
     "segnaposto": {
-      "stile": "anfora",
+      "stile": "scultura",
+      "forma": "colonna",
       "proporzione": [
         4,
         5
       ],
       "colori": [
-        "#E2DDD2",
-        "#C46A3A",
-        "#1B1411"
+        "#3A3E48",
+        "#1C1F26",
+        "#E9E5DC"
       ]
     }
   },
   {
-    "titolo": "Kylix del Sole",
+    "titolo": "Disco di Elio",
     "immagine": "",
     "categoria": "Altro",
     "anno": 2025,
-    "tecnica": "Ceramica a figure nere",
-    "misure": "ø 28 cm",
+    "tecnica": "Bronzo a cera persa",
+    "misure": "ø 34 cm",
     "edizione": "",
-    "descrizione": "Una coppa da vino come quelle dei simposi, con il sole nel tondo e il meandro intorno. Pezzo unico, adatto anche all'uso.",
-    "stato": "Disponibile",
-    "prezzo": "220 €",
+    "descrizione": "Il sole a sedici raggi in rilievo, fuso in fonderia artistica e patinato a caldo. Esemplare unico.",
+    "stato": "Venduta",
+    "prezzo": "",
     "inEvidenza": false,
-    "id": "kylix-sole",
+    "id": "disco-elio",
     "segnaposto": {
-      "stile": "kylix",
+      "stile": "scultura",
+      "forma": "disco",
       "proporzione": [
-        1,
-        1
+        4,
+        5
       ],
       "colori": [
-        "#3A3F4A",
-        "#C46A3A",
-        "#1B1411"
+        "#E4E0D6",
+        "#B9B3A6",
+        "#000000",
+        "#9A6B2F"
+      ]
+    }
+  },
+  {
+    "titolo": "Frammento di fregio",
+    "immagine": "",
+    "categoria": "Altro",
+    "anno": 2026,
+    "tecnica": "Gesso patinato su base in ardesia",
+    "misure": "30 × 42 cm",
+    "edizione": "",
+    "descrizione": "Una lastra spezzata con il meandro e un ramo d'alloro, come un reperto ritrovato.",
+    "stato": "Disponibile",
+    "prezzo": "",
+    "inEvidenza": false,
+    "id": "frammento-fregio",
+    "segnaposto": {
+      "stile": "scultura",
+      "forma": "frammento",
+      "proporzione": [
+        4,
+        5
+      ],
+      "colori": [
+        "#2F3340",
+        "#151820",
+        "#E6E1D6"
       ]
     }
   }

@@ -10,7 +10,7 @@
 const CATEGORIE = [
   { id: "quadri", nome: "Quadri" },
   { id: "stampe", nome: "Stampe" },
-  { id: "sculture", nome: "Sculture" },
+  { id: "ceramica", nome: "Ceramica" },
   { id: "accessori", nome: "Accessori artistici" },
   { id: "altro", nome: "Altro" },
 ];

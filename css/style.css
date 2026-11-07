@@ -213,25 +213,18 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
   text-decoration: none;
   margin-right: auto;
 }
-.marchio-emblema {
-  width: 2.6rem; height: 2.2rem;
+.marchio-logo {
+  width: auto; height: 2.9rem;
+  aspect-ratio: 810 / 850;
   flex: none;
-  overflow: visible;
+  --logo-filo: 0.9px;
 }
-/* Nel marchio il sole è d'oro e la luna è del colore dei testi.
-   Al passaggio del mouse la luna scivola sul sole: un'eclissi */
-.marchio-emblema .emblema-sole { fill: var(--oro); transition: fill 0.4s ease; }
-.marchio-emblema .emblema-raggi {
-  fill: none; stroke: var(--oro); stroke-width: 1.6; stroke-linecap: round;
-  transform-origin: 26px 32px;
-  transition: transform 0.9s var(--curva), opacity 0.4s ease;
-}
-.marchio-emblema .emblema-luna {
-  fill: currentColor;
-  transition: transform 0.7s var(--curva);
-}
-.marchio:hover .emblema-luna, .marchio:focus-visible .emblema-luna { transform: translateX(-7px); }
-.marchio:hover .emblema-raggi, .marchio:focus-visible .emblema-raggi { transform: rotate(-30deg) scale(1.15); }
+/* Nella barra i fili neri restano sottili anche col logo piccolo */
+.marchio-logo .logo-filo, .marchio-logo .logo-mirino { vector-effect: non-scaling-stroke; stroke-dasharray: none; }
+/* Al passaggio del mouse la luna oscilla, il sole si accende e i puntini si rincorrono */
+.marchio:hover .logo-luna, .marchio:focus-visible .logo-luna { transform: rotate(-9deg); }
+.marchio:hover .logo-sole, .marchio:focus-visible .logo-sole { transform: scale(1.05); }
+.marchio:hover .logo-punto, .marchio:focus-visible .logo-punto { animation: logo-punto-entra 0.5s var(--rimbalzo) calc(var(--d) * 22ms) backwards; }
 
 .marchio-testo { display: grid; gap: 0.15rem; }
 .marchio-nome {
@@ -278,14 +271,14 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
 .menu-segno {
   position: absolute; left: 0; top: 0;
   width: var(--w, 0px); height: var(--h, 0px);
-  transform: translate(var(--x, 0px), var(--y, 0px));
+  translate: var(--x, 0px) var(--y, 0px);
   border-radius: 999px;
   background: linear-gradient(100deg,
     color-mix(in srgb, var(--segno-colore, var(--oro)) 26%, transparent),
     color-mix(in srgb, var(--segno-colore, var(--oro)) 12%, transparent));
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.5s var(--curva), width 0.5s var(--curva), height 0.5s var(--curva), opacity 0.3s ease;
+  transition: translate 0.5s var(--curva), width 0.5s var(--curva), height 0.5s var(--curva), opacity 0.3s ease;
 }
 /* una piccola stella sotto la voce */
 .menu-segno::after {
@@ -360,6 +353,61 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
 
 .menu-btn, .menu-piede { display: none; }
 
+/* ---------- Il logo ----------
+   Disegnato in vettoriale dal logo dello studio: gambe della A in oro e
+   argento, il sole con la rosa dei venti, i puntini, il mirino e la falce
+   di luna. I colori stanno nei gradienti in cima a index.html. */
+.logo-colori { position: absolute; width: 0; height: 0; overflow: hidden; }
+.logo { display: block; overflow: visible; }
+.logo-gamba--oro, .logo-disco, .logo-raggi, .logo-punto { fill: url(#logo-oro); }
+.logo-gamba--argento { fill: url(#logo-argento); }
+.logo-filo, .logo-mirino {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--logo-filo, 4px);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.logo-luna { fill: url(#logo-luna); stroke: var(--logo-bordo-luna, rgba(19, 33, 58, 0.22)); stroke-width: 2; }
+.logo-sole, .logo-luna { transform-box: view-box; transition: transform 0.8s var(--curva); }
+.logo-sole { transform-origin: 397px 469px; }
+.logo-luna { transform-origin: 397px 477px; }
+.logo-punto { transform-box: fill-box; transform-origin: center; }
+
+/* Il logo si disegna: prima i fili della A, poi l'oro e l'argento salgono dal basso,
+   il mirino, la luna che arriva da destra, il sole che sorge e i puntini dal centro */
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-filo { animation: logo-traccia 0.9s var(--curva) backwards; }
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-gamba { animation: logo-sale 0.8s var(--curva) 0.25s backwards; }
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-gamba--argento { animation-delay: 0.4s; }
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-mirino { animation: logo-traccia 0.8s var(--curva) 0.55s backwards; }
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-luna { animation: logo-luna-entra 0.95s var(--curva) 0.75s backwards; }
+:is(.velo.disegna, .apertura-pronta .apertura-logo, .apertura-pronta .marchio, .piede-firma.visibile) .logo-sole { animation: logo-sole-sorge 1s ease 1.2s backwards; }
+:is(.velo.disegna, .apertura-pronta .marchio) .logo-punto { animation: logo-punto-entra 0.45s var(--rimbalzo) calc(1.5s + var(--d) * 28ms) backwards; }
+/* nell'apertura e nel piè di pagina i puntini poi continuano a brillare, uno dopo l'altro */
+:is(.apertura-pronta .apertura-logo, .piede-firma.visibile) .logo-punto {
+  animation: logo-punto-entra 0.45s var(--rimbalzo) calc(1.5s + var(--d) * 28ms) backwards,
+             logo-brilla 3.4s ease-in-out calc(2.6s + var(--d) * 110ms) infinite;
+}
+.js-anim:not(.apertura-pronta) .apertura-logo { opacity: 0; }
+@keyframes logo-traccia { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes logo-sale { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes logo-luna-entra {
+  from { opacity: 0; transform: translate(110px, -80px) rotate(32deg) scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes logo-sole-sorge {
+  0% { opacity: 0; transform: scale(0.97); }
+  55% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes logo-punto-entra {
+  0% { opacity: 0; transform: scale(0); }
+  70% { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes logo-brilla { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes logo-bagliore { 50% { filter: drop-shadow(0 0 16px rgba(230, 196, 108, 0.55)); } }
+
 /* ---------- Apertura ---------- */
 .apertura {
   position: relative;
@@ -411,6 +459,14 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
   display: grid; gap: 1.1rem;
   transform: translateY(calc(var(--salita, 0) * -0.08px));
 }
+
+.apertura-logo {
+  width: clamp(5.5rem, 10vw, 8.5rem);
+  margin-bottom: 0.4rem;
+  --logo-filo: 4.5px;
+}
+.apertura-logo .logo { width: 100%; height: auto; }
+.apertura-pronta .apertura-logo .logo { animation: logo-bagliore 6s ease-in-out 2.8s infinite; }
 
 .eyebrow {
   margin: 0;
@@ -496,8 +552,8 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
   45% { opacity: 1; filter: blur(0); color: var(--oro); }
   100% { opacity: 1; transform: none; filter: blur(0); color: var(--inchiostro); }
 }
-.js-anim .apertura-testo > :not(.nome) { opacity: 0; transform: translateY(14px); }
-.apertura-pronta .apertura-testo > :not(.nome) { animation: sali 0.9s var(--curva) both; }
+.js-anim .apertura-testo > :not(.nome):not(.apertura-logo) { opacity: 0; transform: translateY(14px); }
+.apertura-pronta .apertura-testo > :not(.nome):not(.apertura-logo) { animation: sali 0.9s var(--curva) both; }
 .apertura-pronta .eyebrow { animation-delay: 0.1s !important; }
 .apertura-pronta .nome-sotto { animation-delay: 0.75s !important; }
 .apertura-pronta .presentazione { animation-delay: 0.9s !important; }
@@ -595,24 +651,14 @@ html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
   background: radial-gradient(ellipse at 50% 42%, #1A2552 0%, var(--notte) 68%);
 }
 .velo-stelle { position: absolute; inset: 0; width: 100%; height: 100%; }
-.velo-emblema {
+.velo-logo {
   position: relative;
-  width: clamp(92px, 13vw, 150px); height: auto;
-  aspect-ratio: 56 / 48;
-  overflow: visible;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: clamp(130px, 17vw, 210px);
+  color: var(--argento);
+  --logo-filo: 4px;
+  --logo-bordo-luna: rgba(0, 0, 0, 0.35);
 }
-.velo-emblema .emblema-sole, .velo-emblema .emblema-raggi { stroke: var(--oro-chiaro); stroke-width: 1.2; }
-.velo-emblema .emblema-luna { stroke: var(--argento); stroke-width: 1.2; }
-.velo-emblema .emblema-sole { transition: fill 0.6s ease; }
-.velo.is-alba .velo-emblema .emblema-sole { fill: var(--oro-chiaro); }
-/* All'alba l'emblema si disegna: prima il sole, poi i raggi, poi la luna */
-.velo.disegna .velo-emblema > * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: traccia 0.9s var(--curva) forwards; }
-.velo.disegna .velo-emblema .emblema-raggi { animation-delay: 0.35s; }
-.velo.disegna .velo-emblema .emblema-luna { animation-delay: 0.6s; animation-duration: 1.1s; }
-@keyframes traccia { to { stroke-dashoffset: 0; } }
+.velo-logo .logo { width: 100%; height: auto; filter: drop-shadow(0 0 28px rgba(230, 196, 108, 0.35)); }
 /* Il foro di luce che si allarga: la pagina ricompare dentro un anello d'oro */
 .velo-notte.con-foro {
   -webkit-mask-image: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), transparent calc(var(--foro, 0px) - 1px), #000 calc(var(--foro, 0px) + 1px));
@@ -1178,8 +1224,8 @@ html.js-sipario body::after {
 .piede-cielo { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .piede-firma, .piede-inner { position: relative; z-index: 1; }
 .piede-firma {
-  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
-  gap: 1.5rem;
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  gap: 1.5rem clamp(1.25rem, 3vw, 2.5rem);
   padding-bottom: clamp(2rem, 5vw, 3.5rem);
 }
 /* il nome in grande, inciso d'argento, che si riempie d'oro quando compare */
@@ -1198,7 +1244,17 @@ html.js-sipario body::after {
   transition: background-size 2.2s var(--curva) 0.3s;
 }
 .piede-firma.visibile .piede-nome, html:not(.js-anim) .piede-nome { background-size: 100% 100%; }
+.piede-logo {
+  width: clamp(4.5rem, 9vw, 8rem);
+  align-self: center;
+  color: var(--argento);
+  --logo-filo: 4.5px;
+  --logo-bordo-luna: rgba(0, 0, 0, 0.35);
+}
+.piede-logo .logo { width: 100%; height: auto; }
+.piede-firma.visibile .piede-logo .logo { animation: logo-bagliore 6s ease-in-out 2.8s infinite; }
 .piede-su {
+  margin-left: auto;
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-family: var(--font-display);
   font-size: 0.82rem;
@@ -1404,7 +1460,8 @@ html.js-sipario body::after {
 /* ---------- Telefono: il menu è un cielo notturno che si apre dal pulsante ---------- */
 @media (max-width: 760px) {
   .marchio-nome { font-size: 1.05rem; letter-spacing: 0.12em; }
-  .marchio-emblema { width: 2.2rem; height: 1.9rem; }
+  .marchio-logo { height: 2.5rem; }
+  .piede-su { margin-left: 0; }
   .testata-social { display: none; }
 
   .menu-btn {

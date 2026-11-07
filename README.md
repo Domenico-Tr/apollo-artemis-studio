@@ -42,7 +42,7 @@ Con il doppio clic sul file il browser non legge la cartella `contenuti` e le op
 Tutti i contenuti di adesso sono **esempi**:
 
 - **Presentazione e contatti**: email (`studio@esempio.it`), profili Instagram e TikTok (`profilo.dello.studio`).
-- **Opere**: le 13 opere di esempio hanno un segnaposto disegnato al posto della foto. Caricando la foto vera dal pannello, il segnaposto sparisce.
+- **Opere**: le 14 opere di esempio hanno un segnaposto disegnato al posto della foto. Caricando la foto vera dal pannello, il segnaposto sparisce.
 - **Eventi**: date e luoghi inventati.
 - **Processo creativo**: un video di prova (`video/esempio.mp4`) e due link generici a Instagram e TikTok.
 
@@ -61,9 +61,15 @@ Per contare i "mi piace" e le visualizzazioni di tutti serve un progetto Firebas
 2. In **Impostazioni progetto** copia l'**ID progetto** e la **chiave API web**.
 3. Incollali nel pannello, in **Presentazione e contatti**.
 
+## Il logo
+
+Il logo dello studio è ridisegnato in vettoriale dentro `index.html` (nella barra, `<svg class="logo marchio-logo">`): lo script lo copia nell'alba, nell'apertura e nel piè di pagina.
+I colori oro e argento sono i gradienti `logo-oro`, `logo-argento` e `logo-luna` in cima a `index.html`.
+
 ## Animazioni
 
-- Alla prima visita della sessione: l'alba (si disegna l'emblema, poi si apre un anello di luce).
+- Alla prima visita della sessione: l'alba. Il logo si disegna (i fili della A, l'oro e l'argento, il mirino, la luna che arriva, il sole che sorge, i puntini), poi si apre un anello di luce.
+- Il logo: luce che scorre sull'oro e sull'argento, puntini che brillano, la luna che oscilla al passaggio del mouse nella barra.
 - Tra una sezione e l'altra: l'eclissi (un disco di notte bordato d'oro parte dal punto cliccato).
 - Nell'apertura: il nome inciso lettera per lettera e la polvere d'oro che segue il mouse.
 - Scorrendo: i titoli si coprono d'oro, il sole tramonta sul mare, sorge la luna, in fondo si disegnano la Lira e l'Orsa Maggiore.
