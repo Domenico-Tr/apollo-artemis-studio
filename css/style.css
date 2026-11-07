@@ -1,0 +1,2042 @@
+/* =====================================================================
+   Apollo Artemis Studio — stile
+   La pagina è un giorno intero: in alto il giorno di Apollo (marmo pario,
+   oro e blu egeo), al centro il tramonto sul mare (porpora), in fondo la
+   notte di Artemide (blu notte, argento e stelle).
+   Ogni "cielo" ridefinisce gli stessi colori d'uso (--fondo, --inchiostro,
+   --grafite, --linea, --accento, --luce): le sezioni li ereditano da
+   data-cielo="giorno | tramonto | notte" nell'HTML.
+   Tutti i colori e i caratteri si cambiano qui in :root.
+   ===================================================================== */
+
+/* Layout: nome inciso sotto il disco del sole, opera in una nicchia di marmo, opere in colonne libere, poi il sole tramonta e sorge la luna */
+:root {
+  /* Colori del mito */
+  --marmo: #F1F0EB;          /* marmo pario: sfondo del giorno */
+  --marmo-scuro: #E2E0D8;    /* nicchie, metope, superfici incassate */
+  --oro: #B8841F;            /* foglia d'oro di Apollo */
+  --oro-chiaro: #E6C46C;     /* oro nella luce */
+  --argento: #C3CEDF;        /* luce di luna di Artemide */
+  --egeo: #1E4A73;           /* blu del mare: pulsanti di giorno */
+  --melograno: #A8323F;      /* rosso melograno: "mi piace", opere vendute */
+  --alloro: #56703F;         /* verde alloro: opere disponibili */
+  --blu-egeo: #13213A;       /* inchiostro del giorno */
+  --porpora: #2B1C34;        /* fondo del tramonto (porpora di Tiro) */
+  --notte: #0A1023;          /* fondo della notte */
+
+  /* Colori d'uso (giorno). I cieli più sotto li ridefiniscono. */
+  --fondo: var(--marmo);
+  --superficie: #FBFBF8;     /* sottomenu, schede rialzate */
+  --inchiostro: var(--blu-egeo);
+  --grafite: #586275;
+  --linea: #D6D3C9;
+  --accento: var(--egeo);    /* pulsanti, filtro attivo */
+  --su-accento: #F7F6F1;     /* testo sopra --accento */
+  --luce: var(--oro);        /* numerali, dettagli luminosi */
+  --velatura: rgba(184, 132, 31, 0.13);
+  --alone: rgba(230, 196, 108, 0.45);
+  --ombra: rgba(19, 33, 58, 0.08);
+  --ombra-forte: rgba(19, 33, 58, 0.28);
+  --pellicola: #0E1222;
+
+  /* Caratteri */
+  --font-display: "Marcellus", "Trajan Pro", "Optima", Georgia, serif;  /* nome, titoli, menu, pulsanti */
+  --font-testo: "Gentium Book Plus", "Gentium Plus", "Palatino Linotype", Palatino, Georgia, serif;  /* testi e greco */
+
+  /* Scala tipografica */
+  --t-xs: 0.8125rem;
+  --t-s: 0.9375rem;
+  --t-m: 1.125rem;
+  --t-l: clamp(1.2rem, 1.7vw, 1.4rem);
+  --t-xl: clamp(1.6rem, 3vw, 2.2rem);
+  --t-xxl: clamp(2.3rem, 6vw, 4.4rem);
+  --t-nome: clamp(2.9rem, 8.4vw, 8.2rem);
+
+  /* Spazi */
+  --margine: clamp(16px, 4vw, 48px);
+  --larghezza: 1320px;
+  --sezione: clamp(4.5rem, 10vw, 8.5rem);
+  --curva: cubic-bezier(0.65, 0, 0.25, 1);
+  --rimbalzo: cubic-bezier(0.3, 1.5, 0.5, 1);
+
+  /* Il meandro greco, usato come maschera (il colore lo decide chi lo usa) */
+  --meandro: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M0 9.3H10M0 9.3V1H8V7H3V4H5.5' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E");
+  --stella: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+
+  color-scheme: light;
+}
+
+/* Il tramonto: porpora di Tiro, testi rosati, oro acceso */
+[data-cielo="tramonto"] {
+  --fondo: var(--porpora);
+  --superficie: #38253F;
+  --inchiostro: #F6ECE6;
+  --grafite: #CDB6C1;
+  --linea: rgba(246, 236, 230, 0.16);
+  --accento: var(--oro-chiaro);
+  --su-accento: var(--porpora);
+  --luce: var(--oro-chiaro);
+  --velatura: rgba(230, 196, 108, 0.16);
+  --ombra: rgba(0, 0, 0, 0.2);
+  --ombra-forte: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* La notte di Artemide: blu notte, argento, stelle. Anche il menu del telefono è notte. */
+[data-cielo="notte"],
+html.menu-aperto .testata {
+  --fondo: var(--notte);
+  --superficie: #141D3A;
+  --inchiostro: #E9EDF5;
+  --grafite: #9DA8BF;
+  --linea: rgba(195, 206, 223, 0.17);
+  --accento: var(--argento);
+  --su-accento: var(--notte);
+  --luce: var(--oro-chiaro);
+  --velatura: rgba(195, 206, 223, 0.12);
+  --ombra: rgba(0, 0, 0, 0.3);
+  --ombra-forte: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+::selection { background: var(--oro-chiaro); color: var(--blu-egeo); }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+html.no-scroll { overflow: hidden; }
+
+body {
+  position: relative;
+  margin: 0;
+  /* Il marmo (marmo.webp) appena velato, così le venature non disturbano i testi.
+     Per un fondo liscio cancella la riga "background-image". */
+  background-color: var(--marmo);
+  background-image: linear-gradient(rgba(241, 240, 235, 0.5), rgba(241, 240, 235, 0.5)), url("../marmo.webp");
+  background-size: auto, 520px 520px;
+  color: var(--inchiostro);
+  font-family: var(--font-testo);
+  font-size: var(--t-m);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+button { font: inherit; color: inherit; }
+h1, h2, h3 { text-wrap: balance; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 2px solid var(--luce); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.wrap {
+  max-width: var(--larghezza);
+  margin-inline: auto;
+  padding-left: max(var(--margine), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--margine), env(safe-area-inset-right, 0px));
+}
+
+.salta {
+  position: absolute; left: 1rem; top: -4rem; z-index: 60;
+  background: var(--blu-egeo); color: var(--marmo);
+  padding: 0.5rem 1rem; text-decoration: none;
+}
+.salta:focus { top: calc(1rem + env(safe-area-inset-top, 0px)); }
+
+/* Ogni cielo ha il suo fondo e il suo colore dei testi */
+[data-cielo="tramonto"], [data-cielo="notte"] { background-color: var(--fondo); color: var(--inchiostro); }
+/* La notte ha le stelle */
+.sezione[data-cielo="notte"], .piede {
+  background-image: url("../stelle.webp");
+  background-size: 320px 320px;
+}
+
+/* ---------- Testata e menu ---------- */
+.testata {
+  position: fixed; inset: 0 0 auto 0;
+  z-index: 40;
+  padding-top: env(safe-area-inset-top, 0px);
+  color: var(--inchiostro);
+  transition: color 0.5s ease;
+}
+/* Il fondo della barra scende quando scorri; il colore segue il cielo sotto */
+.testata-fondo {
+  position: absolute; inset: 0;
+  background: color-mix(in srgb, var(--fondo) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  backdrop-filter: blur(10px) saturate(1.2);
+  transform: translateY(calc(-100% - 12px));
+  transition: transform 0.55s var(--curva), background-color 0.5s ease;
+}
+/* Il meandro sotto la barra, in filigrana */
+.testata-fondo::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -9px;
+  height: 9px;
+  background: var(--linea);
+  -webkit-mask: var(--meandro) repeat-x 0 0 / 9px 9px;
+  mask: var(--meandro) repeat-x 0 0 / 9px 9px;
+}
+/* ...e lo stesso meandro in oro che si allunga mentre leggi */
+.testata-progresso {
+  position: absolute; left: 0; bottom: -9px;
+  height: 9px;
+  width: var(--progresso, 0%);
+  background: linear-gradient(90deg, var(--oro), var(--oro-chiaro));
+  -webkit-mask: var(--meandro) repeat-x 0 0 / 9px 9px;
+  mask: var(--meandro) repeat-x 0 0 / 9px 9px;
+  z-index: 1;
+}
+.testata.is-scrolled .testata-fondo { transform: none; }
+html.menu-aperto .testata-fondo { transform: translateY(calc(-100% - 12px)); }
+
+.testata-inner {
+  position: relative;
+  display: flex; align-items: center; gap: 2rem;
+  min-height: 4.75rem;
+}
+
+.marchio {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  text-decoration: none;
+  margin-right: auto;
+}
+.marchio-emblema {
+  width: 2.6rem; height: 2.2rem;
+  flex: none;
+  overflow: visible;
+}
+/* Nel marchio il sole è d'oro e la luna è del colore dei testi.
+   Al passaggio del mouse la luna scivola sul sole: un'eclissi */
+.marchio-emblema .emblema-sole { fill: var(--oro); transition: fill 0.4s ease; }
+.marchio-emblema .emblema-raggi {
+  fill: none; stroke: var(--oro); stroke-width: 1.6; stroke-linecap: round;
+  transform-origin: 26px 32px;
+  transition: transform 0.9s var(--curva), opacity 0.4s ease;
+}
+.marchio-emblema .emblema-luna {
+  fill: currentColor;
+  transition: transform 0.7s var(--curva);
+}
+.marchio:hover .emblema-luna, .marchio:focus-visible .emblema-luna { transform: translateX(-7px); }
+.marchio:hover .emblema-raggi, .marchio:focus-visible .emblema-raggi { transform: rotate(-30deg) scale(1.15); }
+
+.marchio-testo { display: grid; gap: 0.15rem; }
+.marchio-nome {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+}
+.marchio-firma { width: 100%; height: 7px; overflow: visible; }
+.marchio-firma path {
+  fill: none;
+  stroke: var(--luce);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.menu { position: relative; }
+.menu-lista {
+  position: relative;
+  display: flex; align-items: center; gap: clamp(1rem, 2.4vw, 2.2rem);
+  margin: 0; padding: 0; list-style: none;
+}
+.menu-voce { position: relative; }
+.menu-link {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.55rem 0.15rem;
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.menu-freccia { width: 0.6rem; height: 0.4rem; transition: transform 0.3s ease; }
+.menu-voce--opere:hover .menu-freccia,
+.menu-voce--opere:focus-within .menu-freccia { transform: rotate(180deg); }
+
+/* La foglia d'oro che scivola tra le voci */
+.menu-segno {
+  position: absolute; left: 0; top: 0;
+  width: var(--w, 0px); height: var(--h, 0px);
+  transform: translate(var(--x, 0px), var(--y, 0px));
+  border-radius: 999px;
+  background: linear-gradient(100deg,
+    color-mix(in srgb, var(--segno-colore, var(--oro)) 26%, transparent),
+    color-mix(in srgb, var(--segno-colore, var(--oro)) 12%, transparent));
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s var(--curva), width 0.5s var(--curva), height 0.5s var(--curva), opacity 0.3s ease;
+}
+/* una piccola stella sotto la voce */
+.menu-segno::after {
+  content: "";
+  position: absolute; left: 50%; bottom: -0.55rem;
+  width: 0.5rem; height: 0.5rem;
+  margin-left: -0.25rem;
+  background: var(--segno-colore, var(--oro));
+  clip-path: var(--stella);
+}
+.menu-segno.visibile { opacity: 1; }
+.menu-segno.senza-scivolo { transition: opacity 0.3s ease; }
+
+/* Sottomenu delle categorie (schermi larghi) */
+.sottomenu {
+  position: absolute; top: calc(100% + 0.6rem); left: -1.25rem;
+  z-index: 3;
+  min-width: 17rem;
+  margin: 0; padding: 0.6rem;
+  list-style: none;
+  background: var(--superficie);
+  border: 1px solid var(--linea);
+  border-radius: 2px;
+  box-shadow: 0 24px 50px -24px var(--ombra-forte);
+  opacity: 0; visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.35s var(--curva), visibility 0s linear 0.35s;
+}
+/* il ponte invisibile tra la voce e il sottomenu, per non perderlo col mouse */
+.sottomenu::before { content: ""; position: absolute; left: 0; right: 0; top: -0.8rem; height: 0.8rem; }
+.menu-voce--opere:hover .sottomenu,
+.menu-voce--opere:focus-within .sottomenu {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 0.25s ease, transform 0.35s var(--curva), visibility 0s;
+}
+.sottomenu a {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.75rem;
+  padding: 0.55rem 0.7rem;
+  text-decoration: none;
+  font-size: var(--t-s);
+  border-radius: 2px;
+  transition: background-color 0.2s ease, padding 0.3s var(--curva);
+}
+.sottomenu a:hover, .sottomenu a:focus-visible { background: var(--velatura); padding-left: 1rem; }
+.campione {
+  width: 0.7rem; height: 0.7rem;
+  background: var(--pigmento, var(--oro));
+  clip-path: var(--stella);
+  transition: transform 0.5s var(--rimbalzo);
+}
+.sottomenu a:hover .campione { transform: rotate(90deg) scale(1.3); }
+.campione--tutti { background: conic-gradient(var(--oro), var(--melograno), var(--egeo), var(--argento), var(--oro)); }
+.conta {
+  font-size: var(--t-xs);
+  color: var(--grafite);
+  font-variant-numeric: tabular-nums;
+}
+
+.testata-social {
+  position: relative; z-index: 2;
+  display: flex; gap: 0.25rem;
+  margin: 0; padding: 0; list-style: none;
+}
+.testata-social a {
+  display: grid; place-items: center;
+  width: 2.3rem; height: 2.3rem;
+  border-radius: 50%;
+  font-size: 1.05rem;
+  transition: color 0.25s ease, transform 0.4s var(--rimbalzo);
+}
+.testata-social a:hover { color: var(--luce); transform: translateY(-2px) rotate(-8deg); }
+
+.menu-btn, .menu-piede { display: none; }
+
+/* ---------- Apertura ---------- */
+.apertura {
+  position: relative;
+  padding: calc(8.5rem + env(safe-area-inset-top, 0px)) 0 clamp(3rem, 7vw, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+/* Il sole dietro il nome: un disco d'oro velato e una corona di raggi che gira piano.
+   Scorrendo la pagina il sole scende (--salita, impostata da script.js). */
+.apertura-sole {
+  position: absolute;
+  left: clamp(-14rem, -8vw, -4rem); top: clamp(1rem, 6vw, 5rem);
+  z-index: -1;
+  width: min(92vw, 860px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  transform: translateY(calc(var(--salita, 0) * 0.35px));
+}
+.sole-disco, .sole-raggi { position: absolute; inset: 0; border-radius: 50%; }
+.sole-disco {
+  inset: 26%;
+  background: radial-gradient(circle at 42% 40%, rgba(255, 244, 214, 0.95), rgba(230, 196, 108, 0.55) 45%, rgba(230, 196, 108, 0) 72%);
+  animation: respiro 7s ease-in-out infinite;
+}
+.sole-raggi {
+  background: repeating-conic-gradient(from 0deg, rgba(184, 132, 31, 0.2) 0deg 1.2deg, transparent 1.2deg 7.5deg);
+  -webkit-mask: radial-gradient(circle, transparent 29%, #000 31%, #000 52%, transparent 70%);
+  mask: radial-gradient(circle, transparent 29%, #000 31%, #000 52%, transparent 70%);
+  animation: ruota 140s linear infinite;
+}
+@keyframes ruota { to { transform: rotate(360deg); } }
+@keyframes respiro { 50% { transform: scale(1.06); opacity: 0.85; } }
+
+/* La polvere d'oro che il mouse lascia nell'apertura (disegnata da script.js) */
+.polvere {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.apertura-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+.apertura-testo {
+  display: grid; gap: 1.1rem;
+  transform: translateY(calc(var(--salita, 0) * -0.08px));
+}
+
+.eyebrow {
+  margin: 0;
+  font-style: italic;
+  font-size: var(--t-l);
+  color: var(--oro);
+  letter-spacing: 0.02em;
+}
+.eyebrow span { margin: 0 0.4em; }
+
+.nome {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-nome);
+  line-height: 0.9;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  /* lettere incise nel marmo: una luce sopra e un'ombra sotto */
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9), 0 -1px 0 rgba(19, 33, 58, 0.18);
+}
+.nome > span { display: block; white-space: nowrap; }
+.nome > span + span { padding-left: clamp(1rem, 4.5vw, 4.5rem); }
+.nome-sotto {
+  display: flex; align-items: center; gap: 1rem;
+  margin: 0.2rem 0 0;
+  max-width: 34rem;
+  font-family: var(--font-display);
+  font-size: var(--t-s);
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--oro);
+}
+.nome-sotto::before, .nome-sotto::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: 0.6; }
+.nome-sotto::before { flex: 0 0 2.5rem; }
+
+.presentazione {
+  margin: 0.6rem 0 0;
+  max-width: 34rem;
+  font-size: var(--t-l);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.adesso { margin: 0.4rem 0 0; font-size: var(--t-s); }
+.adesso > span {
+  display: inline-block;
+  padding: 0.5rem 1rem 0.5rem 0.85rem;
+  border: 1px solid var(--linea);
+  border-radius: 1.4rem;
+  background: color-mix(in srgb, var(--superficie) 70%, transparent);
+}
+.adesso > span::before {
+  content: "";
+  display: inline-block;
+  vertical-align: 0.05em;
+  margin-right: 0.55rem;
+  width: 0.55rem; height: 0.55rem;
+  border-radius: 50%;
+  background: var(--oro);
+  box-shadow: 0 0 0 0 rgba(184, 132, 31, 0.5);
+  animation: fiaccola 2.2s ease-out infinite;
+}
+.adesso.is-futuro > span::before { background: var(--egeo); animation: none; }
+.adesso a { color: var(--egeo); font-weight: 700; }
+@keyframes fiaccola {
+  0% { box-shadow: 0 0 0 0 rgba(230, 196, 108, 0.65); }
+  80%, 100% { box-shadow: 0 0 0 0.75rem rgba(230, 196, 108, 0); }
+}
+
+/* Le lettere del nome compaiono una alla volta, come incise, con un'onda d'oro */
+.js-anim .nome .lettera {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  filter: blur(8px);
+}
+.apertura-pronta .nome .lettera {
+  animation: incidi 1.1s var(--curva) calc(var(--i) * 55ms) both;
+}
+@keyframes incidi {
+  0% { opacity: 0; transform: translateY(0.35em); filter: blur(8px); color: var(--oro-chiaro); }
+  45% { opacity: 1; filter: blur(0); color: var(--oro); }
+  100% { opacity: 1; transform: none; filter: blur(0); color: var(--inchiostro); }
+}
+.js-anim .apertura-testo > :not(.nome) { opacity: 0; transform: translateY(14px); }
+.apertura-pronta .apertura-testo > :not(.nome) { animation: sali 0.9s var(--curva) both; }
+.apertura-pronta .eyebrow { animation-delay: 0.1s !important; }
+.apertura-pronta .nome-sotto { animation-delay: 0.75s !important; }
+.apertura-pronta .presentazione { animation-delay: 0.9s !important; }
+.apertura-pronta .adesso { animation-delay: 1.05s !important; }
+@keyframes sali { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* L'opera in apertura, appesa in una nicchia di marmo ad arco */
+.evidenza {
+  justify-self: end;
+  width: min(100%, 31rem);
+  margin: 0;
+  display: grid; gap: 1.1rem;
+  transform: translateY(calc(var(--salita, 0) * 0.06px));
+}
+.js-anim .evidenza { opacity: 0; transform: translateY(30px); }
+.apertura-pronta .evidenza { animation: sali 1.2s var(--curva) 0.35s both; }
+.evidenza-apri {
+  position: relative;
+  display: grid; place-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  padding: 18% 13% 11%;
+  border: 0;
+  border-radius: 50% 50% 3px 3px / 32% 32% 3px 3px;
+  background:
+    radial-gradient(ellipse at 50% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, #E7E5DE, #D6D3CA);
+  box-shadow: inset 0 26px 44px -18px rgba(19, 33, 58, 0.22), inset 0 -10px 22px -12px rgba(19, 33, 58, 0.18), 0 30px 60px -40px var(--ombra-forte);
+  cursor: pointer;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--curva);
+}
+/* il filetto d'oro che segue l'arco */
+.evidenza-apri::before {
+  content: "";
+  position: absolute; inset: 0.7rem;
+  border: 1px solid rgba(184, 132, 31, 0.55);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.evidenza-apri .cornice {
+  position: relative;
+  display: grid; place-items: center;
+  width: 100%; height: 100%;
+}
+.evidenza-apri .media {
+  width: auto; height: auto;
+  max-width: 100%; max-height: 100%;
+  box-shadow: 0 2px 3px rgba(19, 33, 58, 0.15), 0 22px 40px -18px rgba(19, 33, 58, 0.5);
+}
+.evidenza .didascalia { padding-inline: 0.5rem; }
+
+/* ---------- Comparsa nella luce ----------
+   .rivela fa comparire un elemento come se una lama di luce lo scoprisse
+   da sinistra; .rivela--indietro da destra. Durata e ritardo si regolano
+   con le variabili --durata e --ritardo. */
+.rivela {
+  -webkit-mask-image: linear-gradient(90deg, #000 0 42%, transparent 58% 100%);
+  mask-image: linear-gradient(90deg, #000 0 42%, transparent 58% 100%);
+  -webkit-mask-size: 300% 100%; mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  animation: luce-dentro var(--durata, 0.9s) var(--curva) var(--ritardo, 0s) both;
+}
+.rivela--indietro {
+  -webkit-mask-image: linear-gradient(270deg, #000 0 42%, transparent 58% 100%);
+  mask-image: linear-gradient(270deg, #000 0 42%, transparent 58% 100%);
+  animation-name: luce-indietro;
+}
+@keyframes luce-dentro {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; filter: brightness(1.35) saturate(0.6); }
+  to   { -webkit-mask-position: 0 0;    mask-position: 0 0;    filter: none; }
+}
+@keyframes luce-indietro {
+  from { -webkit-mask-position: 0 0;    mask-position: 0 0;    filter: brightness(1.35) saturate(0.6); }
+  to   { -webkit-mask-position: 100% 0; mask-position: 100% 0; filter: none; }
+}
+
+.appare { animation: appare 0.55s ease var(--ritardo, 0s) both; }
+@keyframes appare { from { opacity: 0; transform: translateY(8px); } }
+
+/* Il velo dell'eclissi che copre lo schermo nel passaggio tra sezioni (gestito da script.js) */
+.velo {
+  position: fixed; inset: 0;
+  z-index: 200;
+  display: none;
+  pointer-events: none;
+}
+.velo.is-attiva { display: block; pointer-events: auto; }
+.velo-corona, .velo-notte { position: absolute; inset: 0; }
+.velo-corona {
+  background: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), #FFF4D2, var(--oro-chiaro) 35%, var(--oro) 80%);
+}
+.velo-notte {
+  display: grid; place-items: center;
+  background: radial-gradient(ellipse at 50% 42%, #1A2552 0%, var(--notte) 68%);
+}
+.velo-stelle { position: absolute; inset: 0; width: 100%; height: 100%; }
+.velo-emblema {
+  position: relative;
+  width: clamp(92px, 13vw, 150px); height: auto;
+  aspect-ratio: 56 / 48;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.velo-emblema .emblema-sole, .velo-emblema .emblema-raggi { stroke: var(--oro-chiaro); stroke-width: 1.2; }
+.velo-emblema .emblema-luna { stroke: var(--argento); stroke-width: 1.2; }
+.velo-emblema .emblema-sole { transition: fill 0.6s ease; }
+.velo.is-alba .velo-emblema .emblema-sole { fill: var(--oro-chiaro); }
+/* All'alba l'emblema si disegna: prima il sole, poi i raggi, poi la luna */
+.velo.disegna .velo-emblema > * { stroke-dasharray: 1; stroke-dashoffset: 1; animation: traccia 0.9s var(--curva) forwards; }
+.velo.disegna .velo-emblema .emblema-raggi { animation-delay: 0.35s; }
+.velo.disegna .velo-emblema .emblema-luna { animation-delay: 0.6s; animation-duration: 1.1s; }
+@keyframes traccia { to { stroke-dashoffset: 0; } }
+/* Il foro di luce che si allarga: la pagina ricompare dentro un anello d'oro */
+.velo-notte.con-foro {
+  -webkit-mask-image: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), transparent calc(var(--foro, 0px) - 1px), #000 calc(var(--foro, 0px) + 1px));
+  mask-image: radial-gradient(circle at var(--bx, 50%) var(--by, 50%), transparent calc(var(--foro, 0px) - 1px), #000 calc(var(--foro, 0px) + 1px));
+}
+.velo-notte.con-foro::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--bx, 50%) var(--by, 50%),
+    transparent calc(var(--foro, 0px) - 2px),
+    rgba(255, 240, 196, 0.95) var(--foro, 0px),
+    rgba(230, 196, 108, 0.55) calc(var(--foro, 0px) + 5px),
+    rgba(230, 196, 108, 0) calc(var(--foro, 0px) + 70px));
+}
+/* Prima che lo script parta, alla prima visita lo schermo è già notte */
+html.js-sipario body::after {
+  content: "";
+  position: fixed; inset: 0;
+  z-index: 199;
+  background: radial-gradient(ellipse at 50% 42%, #1A2552 0%, var(--notte) 68%);
+}
+
+/* I titoli ricevono il focus dopo il passaggio, per chi naviga con la tastiera */
+.nome:focus:not(:focus-visible),
+.titolo-sezione:focus:not(:focus-visible) { outline: none; }
+
+/* ---------- Sezioni ---------- */
+.sezione {
+  position: relative;
+  padding: var(--sezione) 0;
+  overflow: hidden;
+  overflow: clip;
+}
+.sezione > .wrap { position: relative; z-index: 1; }
+
+.intestazione {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 1.25rem 2.5rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.intestazione-titolo { display: grid; gap: 0.4rem; }
+.numerale {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin: 0;
+  font-size: var(--t-l);
+  font-style: italic;
+  color: var(--luce);
+}
+.numerale::after { content: ""; width: 3rem; height: 1px; background: currentColor; opacity: 0.7; }
+
+/* Il titolo si copre di foglia d'oro da sinistra mentre sale verso il centro dello schermo
+   (--luce-titolo va da 0 a 1, la imposta script.js; il testo lo copia da data-testo) */
+.titolo-sezione {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-xxl);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.titolo-sezione::after {
+  content: attr(data-testo);
+  position: absolute; inset: 0;
+  color: transparent;
+  background: linear-gradient(100deg, var(--oro) 0%, var(--oro-chiaro) 40%, #FFF2C8 50%, var(--oro-chiaro) 60%, var(--oro) 100%);
+  background-size: 200% 100%;
+  background-position: calc(100% - var(--luce-titolo, 0) * 100%) 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  clip-path: inset(-0.2em calc(100% - var(--luce-titolo, 0) * 100%) -0.2em 0);
+  pointer-events: none;
+}
+
+.nota-sezione {
+  margin: 0;
+  max-width: 30rem;
+  font-size: var(--t-m);
+  font-style: italic;
+  color: var(--grafite);
+}
+
+/* ---------- Filtri per categoria ---------- */
+.filtri {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin: 0; padding: 0; list-style: none;
+}
+.filtro {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.35s ease, color 0.35s ease;
+}
+.filtro .conta { font-family: var(--font-testo); letter-spacing: 0; transition: color 0.35s ease; }
+.filtro:hover { border-color: var(--luce); }
+.filtro[aria-pressed="true"] { background: var(--inchiostro); border-color: var(--inchiostro); color: var(--fondo); }
+.filtro[aria-pressed="true"] .conta { color: var(--oro-chiaro); }
+/* il sole che si accende sul filtro scelto */
+.filtro::before {
+  content: "";
+  width: 0.45rem; height: 0.45rem;
+  margin-left: -0.15rem;
+  border-radius: 50%;
+  background: var(--oro-chiaro);
+  transform: scale(0);
+  transition: transform 0.4s var(--rimbalzo);
+}
+.filtro[aria-pressed="true"]::before { transform: scale(1); }
+.filtro:not([aria-pressed="true"])::before { width: 0; margin-left: -0.5rem; }
+
+/* ---------- Griglia delle opere ---------- */
+.opere {
+  columns: 3 17rem;
+  column-gap: clamp(1.5rem, 3.5vw, 3.25rem);
+  transition: opacity 0.2s ease;
+}
+.opere.is-cambiando { opacity: 0; }
+.opera {
+  break-inside: avoid;
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  display: grid; gap: 1rem;
+}
+.opera-apri {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0; padding: 0; border: 0;
+  background: none;
+  cursor: pointer;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--curva);
+}
+.opera-apri.is-inclinato { transition: transform 0.12s linear; }
+.opera-apri .media {
+  position: relative;
+  width: 100%; height: auto;
+  box-shadow: 0 1px 2px var(--ombra), 0 24px 40px -26px var(--ombra-forte);
+  outline: 1px solid transparent;
+  outline-offset: 0;
+  transition: outline-color 0.4s ease, outline-offset 0.5s var(--curva), box-shadow 0.4s ease;
+}
+/* Al passaggio del mouse una cornice d'oro si stacca dall'opera */
+.opera-apri:hover .media,
+.opera-apri:focus-visible .media { outline-color: var(--luce); outline-offset: 9px; }
+.opera-apri:focus-visible { outline: none; }
+/* il riflesso di luce che segue il mouse */
+.opera-apri::after, .evidenza-apri::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 248, 225, 0.38), rgba(255, 248, 225, 0) 45%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.opera-apri.is-inclinato::after, .evidenza-apri.is-inclinato::after { opacity: 1; }
+.evidenza-apri::after { border-radius: inherit; }
+
+.media-mancante {
+  display: grid; gap: 0.3rem; align-content: center; justify-items: center;
+  aspect-ratio: 4 / 5;
+  padding: 1.5rem;
+  background: var(--marmo-scuro);
+  color: var(--blu-egeo);
+  font-size: var(--t-xs);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.media-mancante strong { font-size: var(--t-s); }
+
+.didascalia { font-size: var(--t-s); line-height: 1.45; color: var(--grafite); }
+.didascalia p { margin: 0; }
+.didascalia-titolo { color: var(--inchiostro); font-size: var(--t-m); margin-bottom: 0.15rem !important; }
+.didascalia-titolo em { font-style: italic; }
+.stato {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  margin-top: 0.45rem !important;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inchiostro);
+}
+.stato::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--alloro); }
+.stato--riservata::before { background: var(--oro); }
+.stato--venduta::before { background: var(--melograno); }
+
+.vuoto, .avviso-contenuti { font-style: italic; color: var(--grafite); }
+.avviso-contenuti { column-span: all; padding: 1.25rem 1.5rem; border: 1px solid var(--linea); font-style: normal; }
+.link-bottone {
+  padding: 0; border: 0; background: none;
+  color: var(--inchiostro);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.25em;
+  text-decoration-color: var(--luce);
+  cursor: pointer;
+}
+.link-bottone:hover { color: var(--luce); }
+
+/* ---------- Orizzonti: il sole tramonta, la luna sorge ----------
+   --p va da 0 (la fascia entra dal basso) a 1 (esce in alto): la imposta script.js */
+.orizzonte {
+  position: relative;
+  height: clamp(240px, 46vh, 460px);
+  overflow: hidden;
+  isolation: isolate;
+}
+.orizzonte-cielo {
+  position: absolute; inset: 0 0 32% 0;
+  overflow: hidden;
+}
+.orizzonte-mare {
+  position: absolute; inset: 68% 0 0 0;
+  overflow: hidden;
+}
+/* le onde: righe che scorrono piano */
+.orizzonte-mare::before {
+  content: "";
+  position: absolute; inset: 0 -20%;
+  background: repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 9px);
+  animation: onde 9s linear infinite;
+}
+@keyframes onde { to { transform: translateX(10%); } }
+.orizzonte-astro {
+  position: absolute; left: 50%; bottom: 0;
+  border-radius: 50%;
+}
+.orizzonte-riflesso {
+  position: absolute; left: 50%; top: 0;
+  height: 100%;
+  transform: translateX(-50%);
+  -webkit-mask: linear-gradient(180deg, #000, transparent 90%);
+  mask: linear-gradient(180deg, #000, transparent 90%);
+}
+
+.orizzonte--tramonto .orizzonte-cielo {
+  background: linear-gradient(180deg, rgba(241, 240, 235, 0) 0%, #EEDCC0 28%, #E7B07E 58%, #C66A55 82%, #8E3F55 100%);
+}
+.orizzonte--tramonto .orizzonte-mare { background: linear-gradient(180deg, #5E2E4D, var(--porpora)); }
+.orizzonte--tramonto .orizzonte-sole {
+  width: clamp(7rem, 15vw, 11rem); aspect-ratio: 1;
+  background: radial-gradient(circle at 50% 45%, #FFF3CF, #F6CF73 45%, #E99A47 100%);
+  box-shadow: 0 0 60px 20px rgba(246, 207, 115, 0.45), 0 0 140px 60px rgba(233, 154, 71, 0.25);
+  transform: translate(-50%, calc(-150% + var(--p, 0) * 230%));
+}
+.orizzonte--tramonto .orizzonte-riflesso {
+  width: clamp(5rem, 12vw, 9rem);
+  background: repeating-linear-gradient(180deg, rgba(246, 207, 115, 0.85) 0 2px, transparent 2px 8px);
+  opacity: calc(1 - var(--p, 0) * 0.8);
+  animation: luccica 2.6s ease-in-out infinite;
+}
+@keyframes luccica { 50% { transform: translateX(-50%) scaleX(0.7); } }
+
+.orizzonte--luna { background: var(--notte); }
+.orizzonte--luna .orizzonte-cielo {
+  background:
+    url("../stelle.webp") 0 0 / 320px 320px,
+    linear-gradient(180deg, var(--porpora) 0%, #1E1A3D 45%, var(--notte) 100%);
+}
+/* le stelle si accendono mentre la luna sale */
+.orizzonte--luna .orizzonte-cielo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--porpora) 0%, #1E1A3D 45%, var(--notte) 100%);
+  opacity: calc(1 - var(--p, 0) * 1.4);
+}
+.orizzonte--luna .orizzonte-mare { background: linear-gradient(180deg, #121A36, var(--notte)); }
+/* la falce: un disco d'ombra che lascia vedere solo l'orlo illuminato */
+.orizzonte--luna .orizzonte-luna {
+  width: clamp(5rem, 10vw, 7.5rem); aspect-ratio: 1;
+  margin-left: 18%;
+  box-shadow: inset -1.35rem 0.5rem 0 0 #E7EDF7, 0 0 50px rgba(195, 206, 223, 0.25);
+  transform: translate(-50%, calc(120% - var(--p, 0) * 230%)) rotate(-18deg);
+}
+.orizzonte--luna .orizzonte-riflesso {
+  margin-left: 18%;
+  width: clamp(3rem, 7vw, 5rem);
+  background: repeating-linear-gradient(180deg, rgba(231, 237, 247, 0.6) 0 1px, transparent 1px 8px);
+  opacity: calc(var(--p, 0) * 1.2);
+}
+
+/* ---------- Processo creativo ----------
+   Una striscia che scorre in orizzontale, come una pellicola.
+   I video verticali (telefono) hanno tutti la stessa altezza,
+   quelli orizzontali (YouTube) sono più larghi. */
+.sezione[data-cielo="tramonto"] {
+  background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(142, 63, 85, 0.45), rgba(142, 63, 85, 0));
+}
+.processo-lato {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end;
+  gap: 1rem 1.75rem;
+}
+.processo-comandi { display: flex; gap: 0.5rem; }
+.freccia {
+  display: inline-grid; place-items: center;
+  width: 2.9rem; height: 2.9rem;
+  padding: 0;
+  border: 1px solid var(--linea);
+  border-radius: 50%;
+  background: none;
+  color: var(--inchiostro);
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease, transform 0.4s var(--rimbalzo);
+}
+.freccia svg { width: 1.15rem; height: 1.15rem; }
+.freccia:hover:not(:disabled) { border-color: var(--luce); color: var(--luce); transform: scale(1.08); }
+.freccia:disabled { opacity: 0.35; cursor: default; }
+
+.processo-striscia {
+  --altezza-video: clamp(22rem, 64vh, 36rem);
+  display: flex; align-items: flex-start;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--linea) transparent;
+}
+.processo-striscia:focus-visible { outline-offset: 6px; }
+.processo-striscia > .vuoto { flex: 1; }
+
+.video {
+  flex: none;
+  display: grid; gap: 1rem;
+  scroll-snap-align: start;
+}
+.video--verticale { width: min(82vw, calc(var(--altezza-video) * 9 / 16)); }
+.video--quadrato { width: min(82vw, var(--altezza-video)); }
+.video--orizzontale { width: min(82vw, 40rem); }
+
+.video-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  margin: 0; padding: 0; border: 0;
+  overflow: hidden;
+  border-radius: 999px 999px 4px 4px / 22% 22% 4px 4px;
+  background: var(--pellicola);
+  color: var(--inchiostro);
+  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(230, 196, 108, 0.35), 0 30px 60px -30px rgba(0, 0, 0, 0.7);
+}
+.video--orizzontale .video-media { aspect-ratio: 16 / 9; border-radius: 4px; }
+.video--quadrato .video-media { aspect-ratio: 1 / 1; border-radius: 50% 50% 4px 4px / 30% 30% 4px 4px; }
+.video-media video,
+.video-media iframe,
+.video-media img {
+  display: block;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.video-media video { object-fit: contain; background: var(--pellicola); }
+.video-media img { object-fit: cover; transition: transform 0.8s var(--curva); }
+.video-facciata:hover img { transform: scale(1.04); }
+.video-media .media-mancante { height: 100%; aspect-ratio: auto; }
+
+/* Copertina cliccabile (YouTube, Instagram, TikTok) */
+.video-facciata { cursor: pointer; }
+.video-fondo {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  /* senza copertina: un tramonto */
+  background: radial-gradient(circle at 50% 62%, #F6CF73 0%, #E99A47 18%, #C66A55 36%, #8E3F55 58%, var(--porpora) 88%);
+  color: var(--porpora);
+}
+.video-fondo .icona { font-size: 3.25rem; }
+.video-gioca {
+  position: absolute; left: 50%; bottom: 1.1rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.1rem 0.6rem 0.8rem;
+  border-radius: 999px;
+  background: var(--oro-chiaro);
+  color: var(--porpora);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  transition: transform 0.4s var(--rimbalzo), box-shadow 0.3s ease;
+}
+.video-gioca svg { width: 1rem; height: 1rem; }
+.video-gioca .icona { font-size: 1rem; }
+.video-facciata:hover .video-gioca,
+.video-facciata:focus-visible .video-gioca { transform: translateX(-50%) scale(1.07); box-shadow: 0 0 30px rgba(246, 207, 115, 0.6); }
+.video-facciata:focus-visible { outline-offset: 4px; }
+
+.video-testo { display: grid; gap: 0.35rem; }
+.video-data { margin: 0; font-size: var(--t-xs); color: var(--grafite); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.video-titolo {
+  margin: 0;
+  font-weight: 400;
+  font-style: italic;
+  font-size: var(--t-xl);
+  line-height: 1.1;
+}
+.video-descrizione { margin: 0; font-size: var(--t-s); color: var(--grafite); }
+.video-opera { justify-self: start; margin-top: 0.3rem; font-size: var(--t-s); }
+
+@media (max-width: 640px) {
+  .processo-striscia { --altezza-video: min(68vh, 32rem); }
+  .processo-lato { justify-content: flex-start; }
+}
+
+/* ---------- Eventi ---------- */
+.eventi {
+  margin: 0; padding: 0; list-style: none;
+  border-top: 1px solid var(--linea);
+}
+.evento {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: 1rem clamp(1.25rem, 4vw, 3.5rem);
+  align-items: start;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  border-bottom: 1px solid var(--linea);
+}
+/* una linea d'argento si stende sotto l'evento indicato */
+.evento::after {
+  content: "";
+  position: absolute; left: 0; bottom: -1px;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, var(--oro-chiaro), var(--argento));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.7s var(--curva);
+}
+.evento:hover::after { transform: scaleX(1); }
+.evento-data { margin: 0; display: grid; line-height: 1; }
+.evento-giorno {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  color: var(--luce);
+  transition: transform 0.5s var(--rimbalzo);
+  transform-origin: 0 100%;
+}
+.evento:hover .evento-giorno { transform: scale(1.08); }
+.evento-mese {
+  margin-top: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grafite);
+}
+.evento-corpo { display: grid; gap: 0.35rem; }
+.evento-titolo { margin: 0; font-weight: 400; font-style: italic; font-size: var(--t-xl); line-height: 1.1; }
+.evento-tipo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accento);
+}
+.evento-righe { margin: 0.25rem 0 0; display: grid; gap: 0.1rem; font-size: var(--t-s); color: var(--grafite); }
+.evento-link { justify-self: start; font-size: var(--t-s); text-decoration-color: var(--luce); }
+.evento-link:hover { color: var(--luce); }
+.evento-stato { margin: 0; }
+.pill {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pill--ora {
+  border-color: var(--oro-chiaro);
+  background: var(--oro-chiaro);
+  color: var(--notte);
+  animation: fiaccola 2.2s ease-out infinite;
+}
+.nessun-evento { padding: 1.5rem 0; font-style: italic; color: var(--grafite); border-bottom: 1px solid var(--linea); }
+
+.archivio { margin-top: 2.5rem; }
+.archivio summary {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+.archivio summary::-webkit-details-marker { display: none; }
+.archivio summary::before {
+  content: "";
+  width: 0.6rem; height: 0.6rem;
+  background: var(--argento);
+  clip-path: var(--stella);
+  transition: transform 0.5s var(--rimbalzo);
+}
+.archivio[open] summary::before { transform: rotate(135deg) scale(1.2); }
+.archivio summary:hover { color: var(--luce); }
+.eventi--passati { margin-top: 1.25rem; opacity: 0.75; }
+.eventi--passati .evento-giorno { color: var(--grafite); }
+
+/* ---------- Contatti ---------- */
+.contatti { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--linea); }
+.contatto {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--linea);
+}
+.contatto-etichetta {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grafite);
+}
+.contatto-valore {
+  display: inline-flex; align-items: center; gap: 0.9rem;
+  min-width: 0;
+  font-size: var(--t-xl);
+  font-style: italic;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.3s ease, transform 0.5s var(--curva);
+}
+.contatto-valore .icona { font-size: 1.15rem; font-style: normal; flex: none; color: var(--luce); }
+.contatto-valore .icona svg { width: 1.3rem; height: 1.3rem; display: block; }
+.contatto-valore:hover { color: var(--luce); transform: translateX(0.5rem); }
+.copia {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: none;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.copia:hover { border-color: var(--luce); color: var(--luce); }
+
+/* ---------- Piè di pagina: il cielo di Artemide ---------- */
+.piede {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4rem, 9vw, 7rem) 0 calc(2rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--linea);
+}
+.piede-cielo { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.piede-firma, .piede-inner { position: relative; z-index: 1; }
+.piede-firma {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+/* il nome in grande, inciso d'argento, che si riempie d'oro quando compare */
+.piede-nome {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 10vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(195, 206, 223, 0.55);
+  background: linear-gradient(0deg, var(--oro) 0%, var(--oro-chiaro) 60%, #FFF2C8 100%) no-repeat 0 100% / 100% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-size 2.2s var(--curva) 0.3s;
+}
+.piede-firma.visibile .piede-nome, html:not(.js-anim) .piede-nome { background-size: 100% 100%; }
+.piede-su {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.piede-freccia { width: 0.9rem; height: 1.8rem; color: var(--oro-chiaro); transition: transform 0.6s var(--rimbalzo); }
+.piede-su:hover .piede-freccia { transform: translateY(-0.5rem); }
+.piede-su:hover { color: var(--luce); }
+.piede-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--linea);
+  font-size: var(--t-xs);
+  color: var(--grafite);
+}
+.piede-testo p { margin: 0; }
+.piede-social { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+.piede-social a { display: inline-flex; align-items: center; gap: 0.45rem; text-decoration: none; transition: color 0.25s ease; }
+.piede-social a:hover { color: var(--luce); }
+
+/* ---------- Bottoni ---------- */
+.bottone {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid var(--accento);
+  border-radius: 999px;
+  background: var(--accento);
+  color: var(--su-accento);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* un lampo di luce attraversa il bottone */
+.bottone::after {
+  content: "";
+  position: absolute; inset: -2px;
+  z-index: -1;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 242, 200, 0.55) 50%, transparent 70%);
+  transform: translateX(-110%);
+  transition: transform 0.7s var(--curva);
+}
+.bottone:hover::after, .bottone:focus-visible::after { transform: translateX(110%); }
+.bottone:hover { box-shadow: 0 10px 24px -14px var(--ombra-forte); }
+.bottone:active { transform: scale(0.97); }
+.bottone--leggero { background: transparent; color: var(--inchiostro); border-color: var(--linea); }
+.bottone--leggero:hover { border-color: var(--luce); }
+.bottone:disabled { opacity: 0.45; cursor: default; }
+
+/* ---------- Scheda dell'opera ---------- */
+.scheda {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background-color: var(--marmo);
+  background-image: linear-gradient(rgba(241, 240, 235, 0.55), rgba(241, 240, 235, 0.55)), url("../marmo.webp");
+  background-size: auto, 520px 520px;
+  color: var(--inchiostro);
+  overflow: hidden;
+}
+.scheda::backdrop { background: var(--notte); }
+.scheda[open] { animation: entra 0.5s var(--curva); }
+@keyframes entra { from { opacity: 0; transform: scale(0.985); } }
+
+.scheda-inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+}
+
+.scheda-media {
+  position: relative;
+  min-width: 0; min-height: 0;
+  display: grid; place-items: center;
+  padding: calc(4.5rem + env(safe-area-inset-top, 0px)) clamp(1rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  padding-left: max(clamp(1rem, 4vw, 3.5rem), env(safe-area-inset-left, 0px));
+  /* la luce d'oro dietro l'opera */
+  background: radial-gradient(ellipse 55% 50% at 50% 50%, rgba(230, 196, 108, 0.28), rgba(230, 196, 108, 0) 70%);
+}
+.scheda-media .media {
+  width: auto; height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 9rem);
+  max-height: calc(100dvh - 9rem);
+  box-shadow: 0 2px 2px var(--ombra), 0 30px 60px -30px var(--ombra-forte);
+}
+.scheda-media .media-mancante { width: min(100%, 28rem); box-shadow: none; }
+
+.scheda-info {
+  position: relative;
+  min-width: 0;
+  overflow: auto;
+  display: flex; flex-direction: column; gap: 1.25rem;
+  padding: calc(5rem + env(safe-area-inset-top, 0px)) max(2rem, env(safe-area-inset-right, 0px)) 2rem 2rem;
+  border-left: 1px solid var(--linea);
+  background: color-mix(in srgb, var(--superficie) 55%, transparent);
+}
+.scheda-titolo {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--t-xl);
+  line-height: 1.1;
+}
+.scheda-meta { margin: 0; display: grid; gap: 0.1rem; font-size: var(--t-s); color: var(--grafite); }
+.scheda-meta span { display: block; }
+.scheda-descrizione { margin: 0; max-width: 34rem; }
+.scheda-stato {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.5rem 1.25rem;
+  font-size: var(--t-s);
+}
+.scheda-stato .stato { margin: 0 !important; }
+.scheda-azioni { display: grid; gap: 0.65rem; justify-items: start; }
+.scheda-pulsanti { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.scheda-email { margin: 0; font-size: var(--t-xs); color: var(--grafite); }
+.scheda-email span { color: var(--inchiostro); user-select: all; overflow-wrap: anywhere; }
+
+.scheda-nav {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--linea);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.scheda-pos { font-size: var(--t-xs); color: var(--grafite); font-variant-numeric: tabular-nums; }
+
+/* Ad ogni opera nuova i testi della scheda ricompaiono uno dopo l'altro */
+.scheda-info.is-nuova > :not(.scheda-nav) { animation: appare 0.5s ease both; }
+.scheda-info.is-nuova > :nth-child(1) { animation-delay: 0.12s; }
+.scheda-info.is-nuova > :nth-child(2) { animation-delay: 0.18s; }
+.scheda-info.is-nuova > :nth-child(3) { animation-delay: 0.24s; }
+.scheda-info.is-nuova > :nth-child(n + 4) { animation-delay: 0.3s; }
+
+.scheda-chiudi {
+  position: fixed;
+  top: calc(1rem + env(safe-area-inset-top, 0px));
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  z-index: 6;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--superficie);
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.4s var(--rimbalzo);
+}
+.scheda-chiudi:hover { border-color: var(--inchiostro); transform: rotate(-3deg); }
+
+/* ---------- Lente d'ingrandimento nella scheda dell'opera ---------- */
+.lente {
+  position: fixed; left: 0; top: 0;
+  z-index: 5;
+  width: 210px; height: 210px;
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: var(--superficie);
+  background-repeat: no-repeat;
+  border: 3px solid var(--oro-chiaro);
+  box-shadow: 0 14px 40px var(--ombra-forte), 0 0 0 1px var(--oro), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.lente.is-attiva { opacity: 1; transform: scale(1); }
+.lente.in-pausa { opacity: 0; transform: scale(0.6); }
+.con-lente { cursor: none; }
+.scheda-nota-lente { margin: 0; font-size: var(--t-xs); color: var(--grafite); font-style: italic; }
+
+/* ---------- Schermi medi ---------- */
+@media (max-width: 900px) {
+  .apertura-inner { grid-template-columns: minmax(0, 1fr); align-items: start; }
+  .evidenza { justify-self: start; width: min(100%, 28rem); }
+}
+
+@media (max-width: 820px) {
+  .scheda { overflow-y: auto; }
+  .scheda-inner { height: auto; min-height: 100%; grid-template-columns: minmax(0, 1fr); }
+  .scheda-media {
+    padding: calc(4.25rem + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 1.25rem max(16px, env(safe-area-inset-left, 0px));
+  }
+  .scheda-media .media { max-height: 62vh; max-height: 62dvh; }
+  .scheda-info {
+    overflow: visible;
+    border-left: 0;
+    border-top: 1px solid var(--linea);
+    padding: 1.5rem max(16px, env(safe-area-inset-right, 0px)) 2rem max(16px, env(safe-area-inset-left, 0px));
+  }
+}
+
+/* ---------- Telefono: il menu è un cielo notturno che si apre dal pulsante ---------- */
+@media (max-width: 760px) {
+  .marchio-nome { font-size: 1.05rem; letter-spacing: 0.12em; }
+  .marchio-emblema { width: 2.2rem; height: 1.9rem; }
+  .testata-social { display: none; }
+
+  .menu-btn {
+    position: relative; z-index: 2;
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 0.5rem 0.2rem 0.5rem 0.6rem;
+    border: 0; background: none;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .menu-btn-icona { position: relative; display: block; width: 1.6rem; height: 0.9rem; }
+  .menu-btn-icona i {
+    position: absolute; left: 0; right: 0;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: transform 0.45s var(--curva), opacity 0.3s ease, top 0.45s var(--curva);
+  }
+  .menu-btn-icona i:nth-child(1) { top: 0; }
+  .menu-btn-icona i:nth-child(2) { top: calc(50% - 0.75px); right: 0.45rem; }
+  .menu-btn-icona i:nth-child(3) { top: calc(100% - 1.5px); }
+  .menu-btn[aria-expanded="true"] .menu-btn-icona i:nth-child(1) { top: calc(50% - 0.75px); transform: rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .menu-btn-icona i:nth-child(2) { opacity: 0; transform: translateX(0.6rem); }
+  .menu-btn[aria-expanded="true"] .menu-btn-icona i:nth-child(3) { top: calc(50% - 0.75px); transform: rotate(-45deg); }
+
+  .menu {
+    position: fixed; inset: 0;
+    z-index: 1;
+    display: flex; flex-direction: column;
+    padding: calc(6.5rem + env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) calc(2rem + env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px));
+    overflow-y: auto;
+    background:
+      url("../stelle.webp") 0 0 / 320px 320px,
+      radial-gradient(ellipse at 85% 0%, #1A2552, var(--notte) 70%);
+    color: var(--inchiostro);
+    visibility: hidden;
+    clip-path: circle(0 at calc(100% - 2.5rem) 2.4rem);
+    transition: clip-path 0.55s var(--curva), visibility 0s linear 0.55s;
+  }
+  .menu.is-open {
+    visibility: visible;
+    clip-path: circle(150% at calc(100% - 2.5rem) 2.4rem);
+    transition: clip-path 0.75s var(--curva), visibility 0s;
+  }
+  .menu.is-closing { visibility: visible; clip-path: circle(0 at calc(100% - 2.5rem) 2.4rem); }
+  .menu-segno { display: none; }
+  .menu-lista { flex-direction: column; align-items: stretch; gap: 0; }
+  .menu-voce { border-bottom: 1px solid var(--linea); }
+  .menu-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 1.1rem 0;
+    font-size: clamp(1.5rem, 7vw, 2.1rem);
+    letter-spacing: 0.08em;
+  }
+  .menu-freccia { display: none; }
+  .menu.is-open .menu-voce { animation: voce-entra 0.7s var(--curva) calc(0.18s + var(--n) * 0.07s) both; }
+  @keyframes voce-entra { from { opacity: 0; transform: translateY(1.4rem); } }
+  .menu-link[aria-current]::after {
+    content: "";
+    width: 0.7rem; height: 0.7rem;
+    background: var(--oro-chiaro);
+    clip-path: var(--stella);
+  }
+
+  .sottomenu {
+    position: static;
+    min-width: 0;
+    margin: -0.4rem 0 1rem; padding: 0;
+    background: none; border: 0; box-shadow: none;
+    opacity: 1; visibility: visible; transform: none;
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .sottomenu::before { display: none; }
+  .sottomenu a {
+    display: inline-flex; gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+  }
+  .sottomenu a:hover { padding-left: 0.8rem; }
+
+  .menu-piede {
+    display: grid; gap: 1rem;
+    margin-top: auto;
+    padding-top: 2rem;
+    font-size: var(--t-s);
+  }
+  .menu.is-open .menu-piede { animation: voce-entra 0.7s var(--curva) 0.5s both; }
+  .menu-email { font-style: italic; font-size: var(--t-l); color: var(--luce); }
+  .menu-social { display: flex; flex-wrap: wrap; gap: 0.6rem 1.25rem; margin: 0; padding: 0; list-style: none; }
+  .menu-social a { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+
+  .apertura { padding-top: calc(6.5rem + env(safe-area-inset-top, 0px)); }
+  .apertura-sole { left: -40vw; top: 2rem; width: 150vw; }
+  .evento { grid-template-columns: 4.75rem minmax(0, 1fr); }
+  .evento-stato { grid-column: 2; }
+  .contatto { grid-template-columns: minmax(0, 1fr) auto; }
+  .contatto-etichetta { grid-column: 1 / -1; }
+  .contatto-valore { font-size: var(--t-l); }
+}
+
+/* =====================================================================
+   EFFETTI A TEMA MITO
+   ===================================================================== */
+
+/* ---------- Fregio delle categorie ----------
+   Sopra le metope con le miniature delle opere, separate dai triglifi;
+   sotto una fascia blu egeo con il meandro d'oro e le categorie. */
+.nastro {
+  position: relative;
+  margin: clamp(1rem, 3vw, 2.5rem) 0 0;
+  user-select: none;
+}
+.nastro-fascia { position: relative; overflow: hidden; }
+.nastro-traccia { display: flex; width: max-content; will-change: transform; }
+.nastro-gruppo { display: flex; align-items: center; flex: none; }
+
+.nastro-fascia--opere {
+  padding: 12px 0;
+  background: linear-gradient(180deg, #E4E2DA, #D9D6CD);
+  border-top: 1px solid #CFCBC0;
+  box-shadow: inset 0 8px 14px -10px rgba(19, 33, 58, 0.3);
+}
+.nastro-mini {
+  position: relative;
+  display: grid; place-items: center;
+  width: 104px; height: 92px;
+  margin-right: 22px;
+  background: radial-gradient(ellipse at 50% 30%, #F3F2ED, #E2DFD6);
+  box-shadow: inset 0 0 0 1px rgba(19, 33, 58, 0.08), inset 0 10px 16px -12px rgba(19, 33, 58, 0.35);
+}
+/* il triglifo tra una metopa e l'altra */
+.nastro-mini::after {
+  content: "";
+  position: absolute; right: -16px; top: 0; bottom: 0;
+  width: 10px;
+  background: repeating-linear-gradient(90deg, #C9C5BA 0 2px, #E5E2DA 2px 4px);
+}
+.nastro-mini .media { max-width: 78px; max-height: 70px; width: auto; height: auto; box-shadow: 0 6px 10px -6px rgba(19, 33, 58, 0.5); }
+
+.nastro-fascia--categorie {
+  padding: 1.6rem 0;
+  background: var(--blu-egeo);
+  color: #F1EEE5;
+}
+.nastro-fascia--categorie::before, .nastro-fascia--categorie::after {
+  content: "";
+  position: absolute; left: 0; right: 0;
+  height: 10px;
+  background: linear-gradient(90deg, var(--oro), var(--oro-chiaro), var(--oro));
+  -webkit-mask: var(--meandro) repeat-x 0 0 / 10px 10px;
+  mask: var(--meandro) repeat-x 0 0 / 10px 10px;
+  z-index: 1;
+}
+.nastro-fascia--categorie::before { top: 5px; }
+.nastro-fascia--categorie::after { bottom: 5px; transform: scaleY(-1); }
+.nastro-voce {
+  padding: 0 1.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 3.2vw, 2.5rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #F1EEE5;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.nastro-voce--contorno { color: transparent; -webkit-text-stroke: 1px rgba(241, 238, 229, 0.7); }
+.nastro-voce:hover, .nastro-voce:focus-visible {
+  color: var(--oro-chiaro);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 0 22px rgba(230, 196, 108, 0.55);
+}
+.nastro-voce:focus-visible { outline-offset: -4px; }
+.nastro-conta { margin-left: 0.25em; font-family: var(--font-testo); font-size: 0.42em; letter-spacing: 0; color: var(--oro-chiaro); vertical-align: super; -webkit-text-stroke: 0; }
+/* tra una categoria e l'altra: stelle, falci di luna e soli */
+.macchia {
+  flex: none;
+  width: 0.9rem; height: 0.9rem;
+  background: var(--oro-chiaro);
+  clip-path: var(--stella);
+  animation: ruota 12s linear infinite;
+}
+.macchia--1 {
+  clip-path: none;
+  border-radius: 50%;
+  background: none;
+  box-shadow: inset -0.28rem 0.08rem 0 0 var(--argento);
+  animation: none;
+  transform: rotate(-20deg);
+}
+.macchia--3 {
+  clip-path: none;
+  width: 0.55rem; height: 0.55rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--blu-egeo), 0 0 0 4px rgba(230, 196, 108, 0.8);
+  animation: none;
+}
+
+/* L'anteprima delle opere che segue il mouse sulle categorie: una piccola nicchia */
+.nastro-anteprima {
+  position: fixed; left: 0; top: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(var(--ax, -999px), var(--ay, -999px)) rotate(var(--ar, 0deg)) scale(0.85);
+  transition: opacity 0.25s ease, scale 0.3s ease;
+}
+.nastro-anteprima.visibile { opacity: 1; transform: translate(var(--ax, -999px), var(--ay, -999px)) rotate(var(--ar, 0deg)); }
+.nastro-anteprima-quadro {
+  display: grid; justify-items: center; gap: 0.6rem;
+  width: 15rem;
+  padding: 2.2rem 1.4rem 1rem;
+  border-radius: 7.5rem 7.5rem 4px 4px;
+  background: radial-gradient(ellipse at 50% 22%, #FFFFFF, #E2DFD6 75%);
+  box-shadow: 0 24px 50px -16px rgba(10, 16, 35, 0.55), inset 0 0 0 1px rgba(184, 132, 31, 0.4);
+}
+.nastro-anteprima-quadro .media { max-height: 13rem; width: auto; height: auto; box-shadow: 0 10px 18px -10px rgba(19, 33, 58, 0.6); }
+.nastro-anteprima-titolo { font-size: var(--t-xs); color: var(--blu-egeo); text-align: center; }
+
+/* ---------- Cursore da galleria (solo con il mouse) ----------
+   Un piccolo sole che segue il mouse; sulle opere diventa un disco d'oro con "Guarda" */
+.cursore {
+  position: fixed; left: 0; top: 0;
+  z-index: 300;
+  width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.cursore.is-visibile { opacity: 1; }
+.cursore::before {
+  content: "";
+  position: absolute; left: -7px; top: -7px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--oro);
+  box-shadow: 0 0 0 3px rgba(230, 196, 108, 0.15);
+  transition: all 0.4s var(--curva);
+}
+.cursore.is-link::before { left: -20px; top: -20px; width: 40px; height: 40px; background: rgba(230, 196, 108, 0.12); }
+.cursore.is-guarda::before {
+  left: -44px; top: -44px; width: 88px; height: 88px;
+  border-color: var(--oro-chiaro);
+  background: radial-gradient(circle, rgba(255, 243, 207, 0.95), rgba(230, 196, 108, 0.92));
+  box-shadow: 0 0 0 6px rgba(230, 196, 108, 0.2), 0 10px 30px -10px rgba(19, 33, 58, 0.5);
+}
+.cursore-testo {
+  position: absolute; left: 0; top: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blu-egeo);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.4s var(--curva);
+}
+.cursore.is-guarda .cursore-testo { opacity: 1; transform: translate(-50%, -50%); }
+
+/* ---------- L'alone d'oro dietro l'opera illuminata ---------- */
+.opera-apri::before {
+  content: "";
+  position: absolute; inset: 6%;
+  z-index: -1;
+  background: var(--alone-opera, var(--alone));
+  filter: blur(42px);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease, transform 0.8s var(--curva);
+}
+.opera-apri.is-illuminata::before { opacity: 1; transform: scale(1.08); }
+.opera { position: relative; isolation: isolate; }
+
+/* ---------- Simboli di fondo ----------
+   Sole, alloro, arco e luna: grandi disegni a filo d'oro dietro le sezioni,
+   che scorrono più piano della pagina e girano appena */
+.simbolo {
+  position: absolute;
+  z-index: 0;
+  width: clamp(200px, 32vw, 460px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  color: var(--luce);
+  opacity: 0.13;
+  transform: translateY(calc(var(--deriva, 0) * 1px)) rotate(calc(var(--rot, 0deg) + var(--deriva, 0) * 0.12deg));
+}
+.simbolo svg { width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.simbolo--destra { right: -7vw; top: 4rem; }
+.simbolo--sinistra { left: -8vw; top: 35%; }
+.js-anim .simbolo[data-rivela] svg > * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js-anim .simbolo.visibile svg > * { animation: traccia 2.4s var(--curva) forwards; }
+.js-anim .simbolo.visibile svg > :nth-child(2n) { animation-delay: 0.25s; }
+.js-anim .simbolo.visibile svg > :nth-child(3n) { animation-delay: 0.5s; }
+
+/* ---------- Comparse allo scorrimento (solo con JavaScript) ---------- */
+.js-anim [data-rivela]:not(.simbolo):not(.opera) {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s ease, transform 1s var(--curva);
+  transition-delay: calc(var(--i, 0) * 0.08s);
+}
+.js-anim [data-rivela].visibile:not(.opera):not(.simbolo) { opacity: 1; transform: none; }
+.js-anim .nastro[data-rivela] { transform: none; transition-duration: 1.2s; }
+/* le fasce del fregio entrano da lati opposti */
+.nastro-fascia { transition: transform 1.3s var(--curva); }
+.js-anim .nastro[data-rivela]:not(.visibile) .nastro-fascia--opere { transform: translateX(-6%); }
+.js-anim .nastro[data-rivela]:not(.visibile) .nastro-fascia--categorie { transform: translateX(6%); }
+
+/* Le opere si scoprono nella luce quando entrano nello schermo */
+.js-anim .opera[data-rivela]:not(.visibile) .media.rivela { animation-play-state: paused; }
+.opera[data-rivela] .didascalia { transition: opacity 0.7s ease 0.5s, transform 0.8s var(--curva) 0.5s; }
+.js-anim .opera[data-rivela]:not(.visibile) .didascalia { opacity: 0; transform: translateY(10px); }
+/* L'opera in apertura aspetta la fine dell'alba */
+.js-anim:not(.apertura-pronta) .cornice .rivela { animation-play-state: paused; }
+
+/* =====================================================================
+   PROVALO NELLA TUA STANZA
+   ===================================================================== */
+.stanza {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0;
+  background-color: var(--marmo);
+  background-image: linear-gradient(rgba(241, 240, 235, 0.6), rgba(241, 240, 235, 0.6)), url("../marmo.webp");
+  background-size: auto, 520px 520px;
+  color: var(--inchiostro);
+  overflow: hidden;
+}
+.stanza::backdrop { background: var(--notte); }
+.stanza[open] { animation: entra 0.45s var(--curva); }
+
+.stanza-inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 23rem);
+}
+
+.stanza-area {
+  min-width: 0; min-height: 0;
+  display: grid; place-items: center;
+  padding: calc(4.5rem + env(safe-area-inset-top, 0px)) clamp(1rem, 3vw, 2.5rem) clamp(1rem, 3vw, 2.5rem);
+  padding-left: max(clamp(1rem, 3vw, 2.5rem), env(safe-area-inset-left, 0px));
+}
+.stanza-area.is-sopra .stanza-inizio { border-color: var(--oro); background: var(--velatura); }
+
+.stanza-inizio {
+  display: grid; justify-items: center; gap: 1rem;
+  width: min(100%, 34rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px dashed var(--grafite);
+  border-radius: 17rem 17rem 4px 4px / 8rem 8rem 4px 4px;
+  padding-top: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.stanza-inizio-titolo { margin: 0; font-style: italic; font-size: var(--t-xl); line-height: 1.15; }
+.stanza-guida { margin: 0; color: var(--grafite); font-size: var(--t-s); }
+.stanza-scelte { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 0.5rem; }
+.stanza-scelte label.bottone { cursor: pointer; }
+#stanza-file:focus-visible + * { outline: 2px solid var(--oro); }
+
+.stanza-foto {
+  position: relative;
+  max-width: 100%;
+  line-height: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.stanza-foto > img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 7rem);
+  max-height: calc(100dvh - 7rem);
+  width: auto; height: auto;
+}
+.stanza-opera {
+  --spessore: 4px;
+  position: absolute; left: 50%; top: 40%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  touch-action: none;
+  box-shadow: 0 calc(var(--spessore) * 1.4 + 3px) calc(var(--spessore) * 4 + 10px) rgba(0, 0, 0, 0.32);
+}
+.stanza-opera:active { cursor: grabbing; }
+.stanza-opera:focus-visible { outline: 2px dashed var(--oro); outline-offset: 6px; }
+.stanza-opera > img { display: block; width: 100%; height: auto; pointer-events: none; }
+/* Cornici: colori dei materiali, uguali in ogni cielo */
+.stanza-opera.cornice--nera { border: var(--spessore) solid #151515; }
+.stanza-opera.cornice--bianca {
+  border: var(--spessore) solid #1A1A1A;
+  padding: calc(var(--spessore) * 2.2);
+  background: #FBFAF6;
+}
+.stanza-opera.cornice--legno {
+  border: var(--spessore) solid #8A6239;
+  border-image: linear-gradient(135deg, #B08455, #6E4A28 35%, #A27648 65%, #5C3D21) 1;
+}
+.stanza-opera.cornice--oro {
+  border: var(--spessore) solid #B8841F;
+  border-image: linear-gradient(135deg, #F3D98A, #A8741A 30%, #E6C46C 55%, #8C5F12 80%, #D9B25A) 1;
+}
+.stanza-maniglia {
+  position: absolute; right: -15px; bottom: -15px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--superficie);
+  border: 2px solid var(--oro);
+  box-shadow: 0 2px 8px var(--ombra-forte);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+
+.righello { position: absolute; inset: 0; pointer-events: none; }
+.righello-linea {
+  position: absolute; left: 0; top: 0;
+  height: 3px; margin-top: -1.5px;
+  background: var(--oro-chiaro);
+  box-shadow: 0 0 0 1px var(--blu-egeo);
+  transform-origin: 0 50%;
+}
+.righello-punto {
+  position: absolute; left: 0; top: 0;
+  width: 28px; height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  background: var(--oro-chiaro);
+  border: 2px solid var(--blu-egeo);
+  cursor: grab;
+  touch-action: none;
+  pointer-events: auto;
+}
+.righello-etichetta {
+  position: absolute; left: 0; top: 0;
+  transform: translate(-50%, -170%);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--blu-egeo);
+  color: var(--marmo);
+  font-size: var(--t-xs);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.stanza-pannello {
+  min-width: 0;
+  overflow: auto;
+  display: flex; flex-direction: column; gap: 1.1rem;
+  padding: calc(5rem + env(safe-area-inset-top, 0px)) max(2rem, env(safe-area-inset-right, 0px)) 2rem 2rem;
+  border-left: 1px solid var(--linea);
+  background: color-mix(in srgb, var(--superficie) 55%, transparent);
+}
+.stanza-titolo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-xl);
+  line-height: 1.1;
+}
+.stanza-nome-opera { margin: 0; color: var(--grafite); font-size: var(--t-s); }
+.stanza-nome-opera em { font-size: 1.2em; color: var(--inchiostro); }
+.stanza-messaggio { margin: 0; font-size: var(--t-s); color: var(--melograno); }
+.stanza-messaggio:empty { display: none; }
+.stanza-comandi { display: grid; gap: 1.4rem; }
+.stanza-aiuto { margin: 0; font-size: var(--t-xs); color: var(--grafite); }
+.stanza-campo { display: grid; gap: 0.5rem; margin: 0; padding: 0; border: 0; min-width: 0; }
+.stanza-campo > label,
+.stanza-campo legend { font-size: var(--t-s); padding: 0; }
+.stanza-campo input[type="range"] { width: 100%; accent-color: var(--oro); }
+.stanza-cornici { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.stanza-cornici legend { width: 100%; margin-bottom: 0.5rem; }
+.stanza-cornici label {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-size: var(--t-s);
+  cursor: pointer;
+}
+.stanza-cornici label:has(input:checked) { border-color: var(--oro); background: var(--velatura); }
+.stanza-cornici input { accent-color: var(--oro); margin: 0; }
+.stanza-scala { justify-items: start; }
+.stanza-scala-info { margin: 0; font-size: var(--t-s); }
+.stanza-scala-form { display: grid; gap: 0.5rem; width: 100%; }
+.stanza-cm-riga { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.stanza-cm-riga input {
+  width: 6rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linea);
+  background: var(--superficie);
+  color: var(--inchiostro);
+  font: inherit;
+}
+.stanza-azioni { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.stanza-privacy { margin: auto 0 0; padding-top: 1rem; border-top: 1px solid var(--linea); font-size: var(--t-xs); color: var(--grafite); }
+
+@media (max-width: 820px) {
+  .stanza { overflow-y: auto; }
+  .stanza-inner { height: auto; min-height: 100%; grid-template-columns: minmax(0, 1fr); }
+  .stanza-area {
+    padding: calc(4.25rem + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 1rem max(16px, env(safe-area-inset-left, 0px));
+  }
+  .stanza-foto > img { max-height: 62vh; max-height: 62dvh; }
+  .stanza-pannello {
+    overflow: visible;
+    border-left: 0;
+    border-top: 1px solid var(--linea);
+    padding: 1.25rem max(16px, env(safe-area-inset-right, 0px)) 2rem max(16px, env(safe-area-inset-left, 0px));
+  }
+}
+
+/* =====================================================================
+   MI PIACE
+   Il cuore si riempie di rosso melograno dal basso e lancia scintille
+   d'oro e d'argento. Nella scheda un doppio clic sull'opera fa comparire
+   un grande cuore.
+   ===================================================================== */
+.didascalia { position: relative; padding-right: 3rem; }
+.didascalia:has(.viste:not([hidden])) { padding-right: 6.25rem; }
+.reazioni {
+  position: absolute; top: -0.35rem; right: -0.4rem;
+  display: flex; align-items: center; gap: 0.15rem;
+}
+.viste {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  color: var(--grafite);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.viste[hidden] { display: none; }
+.viste svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+.viste--grande { font-size: var(--t-s); }
+
+.piace {
+  position: relative;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.4rem;
+  border: 0;
+  background: none;
+  color: var(--inchiostro);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.piace-cuore {
+  position: relative;
+  display: grid;
+  width: 1.4rem; height: 1.4rem;
+  transition: transform 0.25s var(--rimbalzo);
+}
+.piace:hover .piace-cuore { transform: scale(1.12) rotate(-6deg); }
+.piace-cuore > span { grid-area: 1 / 1; display: block; }
+.piace-cuore svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.piace-vuoto path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; transition: stroke 0.3s ease; }
+.piace-pieno { clip-path: inset(100% 0 0 0); transition: clip-path 0.55s var(--curva); }
+.piace-pieno path { fill: var(--melograno); }
+.piace[aria-pressed="true"] .piace-pieno { clip-path: inset(0 0 0 0); }
+.piace[aria-pressed="true"] .piace-vuoto path { stroke: var(--melograno); }
+.piace-conta:empty { display: none; }
+.piace.sboccia .piace-cuore { animation: battito 0.6s var(--rimbalzo); }
+@keyframes battito {
+  30% { transform: scale(1.45) rotate(-8deg); }
+  100% { transform: none; }
+}
+
+.piace--grande {
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease;
+}
+.piace--grande:hover { border-color: var(--inchiostro); }
+.piace--grande[aria-pressed="true"] { border-color: var(--melograno); }
+.piace--grande .piace-conta { color: var(--grafite); }
+.piace--grande .piace-conta::before { content: "· "; }
+.scheda-piace { display: contents; }
+
+/* Le scintille: piccole stelle d'oro e d'argento */
+.goccia {
+  position: absolute; left: 50%; top: 50%;
+  width: var(--s, 6px); height: var(--s, 6px);
+  margin: calc(var(--s, 6px) / -2) 0 0 calc(var(--s, 6px) / -2);
+  clip-path: var(--stella);
+  background: var(--c, var(--oro-chiaro));
+  pointer-events: none;
+  animation: goccia 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+@keyframes goccia {
+  from { transform: rotate(var(--a, 0deg)) translateX(0) scale(0.3); opacity: 1; }
+  65% { opacity: 1; }
+  to { transform: rotate(var(--a, 0deg)) translateX(var(--d, 20px)) rotate(120deg) scale(1); opacity: 0; }
+}
+
+.cuore-grande {
+  position: absolute;
+  z-index: 3;
+  width: 6.5rem; height: 6.5rem;
+  margin: -3.25rem 0 0 -3.25rem;
+  pointer-events: none;
+  animation: cuore-pop 1s var(--rimbalzo) forwards;
+}
+.cuore-grande svg { display: block; width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(19, 33, 58, 0.3)); }
+.cuore-grande path { fill: var(--melograno); }
+.cuore-grande .goccia { animation-duration: 0.95s; }
+@keyframes cuore-pop {
+  0% { transform: scale(0) rotate(-14deg); opacity: 0; }
+  22% { transform: scale(1.18) rotate(5deg); opacity: 1; }
+  40% { transform: scale(0.94) rotate(-2deg); }
+  70% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.08) translateY(-24px); opacity: 0; }
+}
+
+/* Chi ha chiesto meno animazioni al sistema non ne vede */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

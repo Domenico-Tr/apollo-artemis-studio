@@ -1,0 +1,68 @@
+[
+  {
+    "titolo": "Luce di Delo",
+    "tipo": "Mostra personale",
+    "luogo": "Sala delle Colonne",
+    "citta": "Roma",
+    "inizio": "2026-10-30",
+    "fine": "2026-11-29",
+    "note": "Dal martedì alla domenica, ore 10–19",
+    "indirizzo": "",
+    "link": ""
+  },
+  {
+    "titolo": "La notte di Artemide",
+    "tipo": "Studio aperto",
+    "luogo": "Apollo Artemis Studio",
+    "citta": "Roma",
+    "inizio": "2026-12-19",
+    "fine": "2026-12-20",
+    "note": "Visite libere dalle 17 alle 23, con le stampe della serie Costellazioni.",
+    "indirizzo": "",
+    "link": ""
+  },
+  {
+    "titolo": "Miti contemporanei",
+    "tipo": "Mostra collettiva",
+    "luogo": "Palazzo delle Muse",
+    "citta": "Firenze",
+    "inizio": "2027-01-22",
+    "fine": "2027-03-01",
+    "note": "Inaugurazione venerdì 22 gennaio, ore 18:30",
+    "indirizzo": "",
+    "link": ""
+  },
+  {
+    "titolo": "Incidere il cielo",
+    "tipo": "Laboratorio di acquaforte",
+    "luogo": "Officina Atena",
+    "citta": "Milano",
+    "inizio": "2027-03-13",
+    "fine": "2027-03-14",
+    "note": "Massimo 10 partecipanti, iscrizioni via email",
+    "indirizzo": "",
+    "link": ""
+  },
+  {
+    "titolo": "Il carro del Sole",
+    "tipo": "Mostra personale",
+    "luogo": "Galleria Eos",
+    "citta": "Napoli",
+    "inizio": "2026-04-11",
+    "fine": "2026-05-31",
+    "note": "",
+    "indirizzo": "",
+    "link": ""
+  },
+  {
+    "titolo": "Pietra e luce",
+    "tipo": "Mostra a due voci",
+    "luogo": "Spazio Tholos",
+    "citta": "Torino",
+    "inizio": "2025-10-17",
+    "fine": "2025-12-06",
+    "note": "",
+    "indirizzo": "",
+    "link": ""
+  }
+]

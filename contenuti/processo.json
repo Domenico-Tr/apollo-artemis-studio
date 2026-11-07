@@ -1,0 +1,21 @@
+[
+  {
+    "titolo": "Esempio: video caricato dal pannello",
+    "data": "2026-11-03",
+    "video": "/video/esempio.mp4",
+    "descrizione": "Un file MP4 caricato dal pannello si guarda qui, senza uscire dal sito.",
+    "opera": "Il carro del Sole"
+  },
+  {
+    "titolo": "Esempio: link a un reel di Instagram",
+    "data": "2026-10-18",
+    "link": "https://www.instagram.com/",
+    "descrizione": "Con un link a Instagram la scheda apre il video sul social."
+  },
+  {
+    "titolo": "Esempio: link a TikTok",
+    "data": "2026-10-02",
+    "link": "https://www.tiktok.com/",
+    "descrizione": "Lo stesso vale per TikTok."
+  }
+]
