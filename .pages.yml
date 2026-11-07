@@ -1,0 +1,181 @@
+media:
+  - name: immagini
+    label: Foto delle opere
+    input: img
+    output: /img
+    categories: [image]
+  - name: video
+    label: Video dello studio
+    input: video
+    output: /video
+    categories: [video, image]
+
+content:
+  - name: opere
+    label: Opere
+    type: file
+    path: contenuti/opere.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: immagine
+        label: Foto dell'opera
+        type: image
+        description: Senza foto il sito mostra un segnaposto a tema.
+        options:
+          media: immagini
+      - name: categoria
+        label: Categoria
+        type: select
+        required: true
+        options:
+          values: [Quadri, Stampe, Ceramica, Accessori artistici, Altro]
+      - name: collezione
+        label: Collezione (solo per i quadri)
+        type: string
+        description: Il nome della collezione, scritto uguale per tutti i quadri della stessa serie. Lascia vuoto se il quadro non fa parte di una collezione.
+      - name: anno
+        label: Anno
+        type: number
+      - name: tecnica
+        label: Tecnica
+        type: string
+        description: Per esempio "Olio e foglia d'oro su tela".
+      - name: misure
+        label: Misure
+        type: string
+        description: Altezza × base, per esempio "100 × 80 cm". Servono anche per "Provalo nella tua stanza".
+      - name: edizione
+        label: Edizione
+        type: string
+        description: Solo per stampe e serie, per esempio "Edizione di 12 esemplari".
+      - name: descrizione
+        label: Descrizione
+        type: text
+      - name: stato
+        label: Stato
+        type: select
+        default: Disponibile
+        options:
+          values: [Disponibile, Riservata, Venduta]
+      - name: prezzo
+        label: Prezzo
+        type: string
+        description: Lascia vuoto per "Prezzo su richiesta".
+      - name: inEvidenza
+        label: Opera grande in apertura
+        type: boolean
+        description: Attivalo su una sola opera.
+
+  - name: processo
+    label: Processo creativo (video)
+    type: file
+    path: contenuti/processo.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: data
+        label: Data
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: video
+        label: Video caricato (MP4)
+        type: file
+        description: Carica un file MP4 oppure compila il link qui sotto.
+        options:
+          media: video
+          extensions: [mp4, mov, webm]
+      - name: link
+        label: Oppure link a YouTube, Instagram o TikTok
+        type: string
+      - name: copertina
+        label: Copertina (facoltativa)
+        type: image
+        options:
+          media: video
+      - name: descrizione
+        label: Descrizione
+        type: text
+      - name: opera
+        label: Opera finita (titolo esatto)
+        type: string
+        description: Se corrisponde al titolo di un'opera, sotto il video compare "Guarda l'opera finita".
+
+  - name: eventi
+    label: Eventi
+    type: file
+    path: contenuti/eventi.json
+    format: json
+    list: true
+    fields:
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: tipo
+        label: Tipo
+        type: string
+        description: Per esempio "Mostra personale", "Studio aperto", "Laboratorio".
+      - name: luogo
+        label: Luogo
+        type: string
+      - name: citta
+        label: Città
+        type: string
+      - name: inizio
+        label: Inizio
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: fine
+        label: Fine
+        type: date
+        options:
+          format: yyyy-MM-dd
+      - name: note
+        label: Orari e note
+        type: string
+      - name: indirizzo
+        label: Indirizzo (apre Google Maps)
+        type: string
+      - name: link
+        label: Pagina dell'evento
+        type: string
+
+  - name: sito
+    label: Presentazione e contatti
+    type: file
+    path: contenuti/sito.json
+    format: json
+    fields:
+      - name: presentazione
+        label: Presentazione (sotto il nome)
+        type: text
+      - name: email
+        label: Email
+        type: string
+      - name: instagram
+        label: Profili Instagram (senza @)
+        type: string
+        list: true
+      - name: tiktok
+        label: Profili TikTok (senza @)
+        type: string
+        list: true
+      - name: firebaseProgetto
+        label: Firebase, ID progetto (facoltativo)
+        type: string
+        description: Per contare "mi piace" e visualizzazioni di tutti i visitatori.
+      - name: firebaseChiave
+        label: Firebase, chiave API web (facoltativa)
+        type: string
