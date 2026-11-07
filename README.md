@@ -48,7 +48,7 @@ Tutti i contenuti di adesso sono **esempi**:
 
 ## Cambiare colori, caratteri e categorie
 
-Quando cambi `css/style.css` o i file in `js/`, aumenta di uno il numero dopo `?v=` nelle tre righe che li caricano in `index.html` (per esempio da `?v=3` a `?v=4`): così i browser che hanno già visto il sito scaricano subito la versione nuova invece di usare quella vecchia salvata.
+Quando cambi `css/style.css` o i file in `js/`, aumenta di uno il numero dopo `?v=` nelle tre righe che li caricano in `index.html` (per esempio da `?v=4` a `?v=5`): così i browser che hanno già visto il sito scaricano subito la versione nuova invece di usare quella vecchia salvata.
 
 - Colori e caratteri: in cima a `css/style.css`, nel blocco `:root`. I tre cieli (giorno, tramonto, notte) hanno ciascuno il proprio blocco subito sotto.
 - Categorie: `js/categorie.js`. Se ne aggiungi o rinomini una, cambia anche l'elenco del campo "Categoria" in `.pages.yml`.

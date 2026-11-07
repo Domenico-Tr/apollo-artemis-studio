@@ -920,9 +920,15 @@ html.js-sipario body::after {
   overflow: hidden;
   isolation: isolate;
 }
+.orizzonte-astro { isolation: isolate; }
 .orizzonte-cielo {
   position: absolute; inset: 0 0 32% 0;
   overflow: hidden;
+}
+/* in alto il tramonto sfuma nel marmo della sezione di sopra: nessuno stacco, anche con il sole alto */
+.orizzonte--tramonto .orizzonte-cielo {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 22%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 22%);
 }
 .orizzonte-mare {
   position: absolute; inset: 68% 0 0 0;
@@ -940,6 +946,15 @@ html.js-sipario body::after {
   position: absolute; left: 50%; bottom: 0;
   border-radius: 50%;
 }
+/* la luce intorno all'astro: un alone sfumato (non un'ombra, che verrebbe tagliata a rettangolo) */
+.orizzonte-astro::before {
+  content: "";
+  position: absolute; inset: -130%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--alone-astro) 0%, transparent 62%);
+  pointer-events: none;
+}
 .orizzonte-riflesso {
   position: absolute; left: 50%; top: 0;
   height: 100%;
@@ -954,8 +969,8 @@ html.js-sipario body::after {
 .orizzonte--tramonto .orizzonte-mare { background: linear-gradient(180deg, #5E2E4D, var(--porpora)); }
 .orizzonte--tramonto .orizzonte-sole {
   width: clamp(7rem, 15vw, 11rem); aspect-ratio: 1;
+  --alone-astro: rgba(246, 207, 115, 0.5);
   background: radial-gradient(circle at 50% 45%, #FFF3CF, #F6CF73 45%, #E99A47 100%);
-  box-shadow: 0 0 60px 20px rgba(246, 207, 115, 0.45), 0 0 140px 60px rgba(233, 154, 71, 0.25);
   transform: translate(-50%, calc(-150% + var(--p, 0) * 230%));
 }
 .orizzonte--tramonto .orizzonte-riflesso {
@@ -984,7 +999,8 @@ html.js-sipario body::after {
 .orizzonte--luna .orizzonte-luna {
   width: clamp(5rem, 10vw, 7.5rem); aspect-ratio: 1;
   margin-left: 18%;
-  box-shadow: inset -1.35rem 0.5rem 0 0 #E7EDF7, 0 0 50px rgba(195, 206, 223, 0.25);
+  --alone-astro: rgba(195, 206, 223, 0.22);
+  box-shadow: inset -1.35rem 0.5rem 0 0 #E7EDF7;
   transform: translate(-50%, calc(120% - var(--p, 0) * 230%)) rotate(-18deg);
 }
 .orizzonte--luna .orizzonte-riflesso {
