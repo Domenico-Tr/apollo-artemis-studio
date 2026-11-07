@@ -3,6 +3,7 @@
     "titolo": "Il carro del Sole",
     "immagine": "",
     "categoria": "Quadri",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Olio e foglia d'oro su tela",
     "misure": "100 × 80 cm",
@@ -30,6 +31,7 @@
     "titolo": "Artemide nel bosco",
     "immagine": "",
     "categoria": "Quadri",
+    "collezione": "I gemelli di Delo",
     "anno": 2024,
     "tecnica": "Acrilico su tela",
     "misure": "70 × 50 cm",
@@ -54,9 +56,38 @@
     }
   },
   {
+    "titolo": "Selene",
+    "immagine": "",
+    "categoria": "Quadri",
+    "collezione": "I gemelli di Delo",
+    "anno": 2025,
+    "tecnica": "Olio su tela",
+    "misure": "80 × 60 cm",
+    "edizione": "",
+    "descrizione": "La falce di Selene sopra il bosco sacro di Delo, in viola e argento. Risponde al sole del Carro: lo stesso orizzonte, di notte.",
+    "stato": "Disponibile",
+    "prezzo": "",
+    "inEvidenza": false,
+    "id": "selene",
+    "segnaposto": {
+      "stile": "luna",
+      "proporzione": [
+        3,
+        4
+      ],
+      "colori": [
+        "#1A1838",
+        "#4B3F6E",
+        "#F1EEE4",
+        "#14121F"
+      ]
+    }
+  },
+  {
     "titolo": "Delo all'alba",
     "immagine": "",
     "categoria": "Quadri",
+    "collezione": "Affreschi del mito",
     "anno": 2025,
     "tecnica": "Tempera e foglia d'oro su tavola",
     "misure": "60 × 60 cm",
@@ -81,9 +112,38 @@
     }
   },
   {
+    "titolo": "La corona di Dafne",
+    "immagine": "",
+    "categoria": "Quadri",
+    "collezione": "Affreschi del mito",
+    "anno": 2026,
+    "tecnica": "Tempera su tavola preparata a gesso",
+    "misure": "50 × 50 cm",
+    "edizione": "",
+    "descrizione": "La ninfa che si trasformò in alloro per sfuggire ad Apollo: la sua corona su un fondo ocra, come una parete di Ercolano.",
+    "stato": "Disponibile",
+    "prezzo": "",
+    "inEvidenza": false,
+    "id": "corona-dafne",
+    "segnaposto": {
+      "stile": "affresco",
+      "proporzione": [
+        1,
+        1
+      ],
+      "colori": [
+        "#B7802F",
+        "#EFE4CC",
+        "#3F5E33",
+        "#2A1F14"
+      ]
+    }
+  },
+  {
     "titolo": "Costellazione della Lira",
     "immagine": "",
     "categoria": "Stampe",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Acquaforte e acquatinta su carta Hahnemühle",
     "misure": "40 × 30 cm",
@@ -113,6 +173,7 @@
     "titolo": "Orione il cacciatore",
     "immagine": "",
     "categoria": "Stampe",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Acquaforte e acquatinta su carta Hahnemühle",
     "misure": "40 × 30 cm",
@@ -142,6 +203,7 @@
     "titolo": "Raggi di Febo",
     "immagine": "",
     "categoria": "Stampe",
+    "collezione": "",
     "anno": 2026,
     "tecnica": "Serigrafia a tre colori",
     "misure": "70 × 50 cm",
@@ -170,6 +232,7 @@
     "titolo": "Anfora di Artemide",
     "immagine": "",
     "categoria": "Ceramica",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Terracotta a figure nere",
     "misure": "h 38 cm",
@@ -196,6 +259,7 @@
     "titolo": "Hydria di Delo",
     "immagine": "",
     "categoria": "Ceramica",
+    "collezione": "",
     "anno": 2026,
     "tecnica": "Terracotta a figure rosse",
     "misure": "h 42 cm",
@@ -222,6 +286,7 @@
     "titolo": "Kylix del Sole",
     "immagine": "",
     "categoria": "Ceramica",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Ceramica a figure nere",
     "misure": "ø 28 cm",
@@ -248,6 +313,7 @@
     "titolo": "Foulard Meandro",
     "immagine": "",
     "categoria": "Accessori artistici",
+    "collezione": "",
     "anno": 2026,
     "tecnica": "Seta stampata, orli cuciti a mano",
     "misure": "90 × 90 cm",
@@ -275,6 +341,7 @@
     "titolo": "Taccuino d'alloro",
     "immagine": "",
     "categoria": "Accessori artistici",
+    "collezione": "",
     "anno": 2026,
     "tecnica": "Copertina in lino con impressione in oro, 160 pagine",
     "misure": "21 × 15 cm",
@@ -302,6 +369,7 @@
     "titolo": "Colonna di Delfi",
     "immagine": "",
     "categoria": "Altro",
+    "collezione": "",
     "anno": 2024,
     "tecnica": "Marmo bianco di Carrara",
     "misure": "h 48 cm",
@@ -329,6 +397,7 @@
     "titolo": "Disco di Elio",
     "immagine": "",
     "categoria": "Altro",
+    "collezione": "",
     "anno": 2025,
     "tecnica": "Bronzo a cera persa",
     "misure": "ø 34 cm",
@@ -357,6 +426,7 @@
     "titolo": "Frammento di fregio",
     "immagine": "",
     "categoria": "Altro",
+    "collezione": "",
     "anno": 2026,
     "tecnica": "Gesso patinato su base in ardesia",
     "misure": "30 × 42 cm",

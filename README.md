@@ -42,16 +42,17 @@ Con il doppio clic sul file il browser non legge la cartella `contenuti` e le op
 Tutti i contenuti di adesso sono **esempi**:
 
 - **Presentazione e contatti**: email (`studio@esempio.it`), profili Instagram e TikTok (`profilo.dello.studio`).
-- **Opere**: le 14 opere di esempio hanno un segnaposto disegnato al posto della foto. Caricando la foto vera dal pannello, il segnaposto sparisce.
+- **Opere**: le 16 opere di esempio hanno un segnaposto disegnato al posto della foto. Caricando la foto vera dal pannello, il segnaposto sparisce.
 - **Eventi**: date e luoghi inventati.
 - **Processo creativo**: un video di prova (`video/esempio.mp4`) e due link generici a Instagram e TikTok.
 
 ## Cambiare colori, caratteri e categorie
 
-Quando cambi `css/style.css` o i file in `js/`, aumenta di uno il numero dopo `?v=` nelle tre righe che li caricano in `index.html` (per esempio da `?v=2` a `?v=3`): così i browser che hanno già visto il sito scaricano subito la versione nuova invece di usare quella vecchia salvata.
+Quando cambi `css/style.css` o i file in `js/`, aumenta di uno il numero dopo `?v=` nelle tre righe che li caricano in `index.html` (per esempio da `?v=3` a `?v=4`): così i browser che hanno già visto il sito scaricano subito la versione nuova invece di usare quella vecchia salvata.
 
 - Colori e caratteri: in cima a `css/style.css`, nel blocco `:root`. I tre cieli (giorno, tramonto, notte) hanno ciascuno il proprio blocco subito sotto.
 - Categorie: `js/categorie.js`. Se ne aggiungi o rinomini una, cambia anche l'elenco del campo "Categoria" in `.pages.yml`.
+- Collezioni: dentro **Quadri** c'è il sottogruppo **Collezioni**. Nel pannello, sul quadro, scrivi il nome della collezione nel campo "Collezione" (uguale per tutti i quadri della stessa serie): il quadro resta tra i Quadri e compare anche in Collezioni, raggruppato con gli altri della stessa collezione.
 - Quadri e stampe hanno il pulsante **Provalo nella tua stanza** (le categorie sono in `CATEGORIE_DA_PARETE` dentro `js/script.js`).
 
 ## "Mi piace" e visualizzazioni di tutti i visitatori (facoltativo)

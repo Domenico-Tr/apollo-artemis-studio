@@ -31,7 +31,13 @@
   // I colori del mito, a turno per categorie e voci di menu
   const PIGMENTI = ["var(--oro)", "var(--melograno)", "var(--egeo)", "var(--alloro)"];
 
-  const NOMI_CATEGORIE = Object.fromEntries(CATEGORIE.map((c) => [c.id, c.nome]));
+  // I sottogruppi (per ora "Collezioni" dentro "Quadri", vedi js/categorie.js):
+  // contengono le opere della categoria madre che hanno compilato il campo indicato
+  const SOTTOGRUPPI = CATEGORIE.flatMap((c) => (c.sottogruppi || []).map((s) => ({ ...s, padre: c.id })));
+  const sottogruppo = (id) => SOTTOGRUPPI.find((s) => s.id === id) || null;
+  // Categorie e sottogruppi in ordine, ognuno subito dopo la sua categoria
+  const VOCI_CATEGORIE = CATEGORIE.flatMap((c) => [c, ...SOTTOGRUPPI.filter((s) => s.padre === c.id)]);
+  const NOMI_CATEGORIE = Object.fromEntries(VOCI_CATEGORIE.map((c) => [c.id, c.nome]));
   const STATI = { disponibile: "Disponibile", venduta: "Venduta", riservata: "Riservata" };
   const MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
   const MESI_BREVI = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
@@ -72,6 +78,7 @@
       // "/img/foto.jpg" e "img/foto.jpg" funzionano entrambi, anche su GitHub Pages
       immagine: String(opera.immagine || "").trim().replace(/^\/+/, ""),
       inEvidenza: opera.inEvidenza === true || opera.inEvidenza === "true",
+      collezione: String(opera.collezione || "").trim(),
     };
   }
 
@@ -1404,7 +1411,20 @@
   let filtro = "tutte";
   let visibili = OPERE.slice();
 
-  const conta = (id) => (id === "tutte" ? OPERE.length : OPERE.filter((o) => o.categoria === id).length);
+  // Le opere di una categoria o di un sottogruppo
+  function opereDi(id) {
+    if (id === "tutte") return OPERE.slice();
+    const s = sottogruppo(id);
+    if (s) return OPERE.filter((o) => o.categoria === s.padre && String(o[s.campo] || "").trim());
+    return OPERE.filter((o) => o.categoria === id);
+  }
+  const conta = (id) => opereDi(id).length;
+  // Il colore di una voce: quello della categoria, che il sottogruppo eredita
+  const pigmentoDi = (id) => {
+    const s = sottogruppo(id);
+    const i = CATEGORIE.findIndex((c) => c.id === (s ? s.padre : id));
+    return PIGMENTI[Math.max(0, i) % PIGMENTI.length];
+  };
 
   function statoHTML(o) {
     if (!STATI[o.stato]) return "";
@@ -1413,6 +1433,7 @@
 
   function didascaliaHTML(o) {
     return `<div class="reazioni">${visteHTML(o)}${bottonePiace(o)}</div>
+      ${o.collezione ? `<p class="didascalia-collezione">Collezione ${esc(o.collezione)}</p>` : ""}
       <p class="didascalia-titolo"><em>${esc(o.titolo)}</em>${o.anno ? `, ${esc(o.anno)}` : ""}</p>
       ${o.tecnica ? `<p>${esc(o.tecnica)}</p>` : ""}
       ${o.misure ? `<p>${esc(o.misure)}</p>` : ""}
@@ -1423,22 +1444,21 @@
   // Il sottomenu delle opere: ogni categoria ha il suo campione di colore,
   // a turno i colori del mito; "Tutte le opere" li ha tutti
   function costruisciSottomenu() {
-    const pigmenti = PIGMENTI;
-    const voci = [{ id: "tutte", nome: "Tutte le opere" }, ...CATEGORIE];
+    const voci = [{ id: "tutte", nome: "Tutte le opere" }, ...VOCI_CATEGORIE];
     $("#sottomenu-opere").innerHTML = voci
-      .map((v, n) => {
+      .map((v) => {
         const tutte = v.id === "tutte";
-        const colore = tutte ? "" : ` style="--pigmento: ${pigmenti[(n - 1) % pigmenti.length]}"`;
-        return `<li><a href="#opere" data-categoria="${esc(v.id)}"${colore}><span class="campione${tutte ? " campione--tutti" : ""}" aria-hidden="true"></span><span class="sottomenu-nome">${esc(v.nome)}</span><span class="conta">${conta(v.id)}</span></a></li>`;
+        const colore = tutte ? "" : ` style="--pigmento: ${pigmentoDi(v.id)}"`;
+        return `<li${sottogruppo(v.id) ? ' class="sottomenu-figlio"' : ""}><a href="#opere" data-categoria="${esc(v.id)}"${colore}><span class="campione${tutte ? " campione--tutti" : ""}" aria-hidden="true"></span><span class="sottomenu-nome">${esc(v.nome)}</span><span class="conta">${conta(v.id)}</span></a></li>`;
       })
       .join("");
   }
 
   function costruisciFiltri() {
-    const voci = [{ id: "tutte", nome: "Tutte" }, ...CATEGORIE];
+    const voci = [{ id: "tutte", nome: "Tutte" }, ...VOCI_CATEGORIE];
     const box = $("#filtri");
     box.innerHTML = voci
-      .map((v) => `<li><button type="button" class="filtro" data-categoria="${esc(v.id)}" aria-pressed="${v.id === filtro}">${esc(v.nome)}<span class="conta">${conta(v.id)}</span></button></li>`)
+      .map((v) => `<li${sottogruppo(v.id) ? ' class="filtri-figlio"' : ""}><button type="button" class="filtro${sottogruppo(v.id) ? " filtro--figlio" : ""}" data-categoria="${esc(v.id)}" aria-pressed="${v.id === filtro}">${esc(v.nome)}<span class="conta">${conta(v.id)}</span></button></li>`)
       .join("");
     box.addEventListener("click", (e) => {
       const b = e.target.closest("[data-categoria]");
@@ -1500,9 +1520,37 @@
 
   function disegnaGriglia(anima = false, ritardoBase = 0) {
     const griglia = $("#opere-griglia");
-    visibili = filtro === "tutte" ? OPERE.slice() : OPERE.filter((o) => o.categoria === filtro);
+    visibili = opereDi(filtro);
     griglia.replaceChildren();
-    if (!visibili.length) {
+    const gruppo = sottogruppo(filtro);
+    if (visibili.length && gruppo) {
+      // Collezioni: le opere raggruppate per nome, ogni gruppo con il suo titolo
+      const gruppi = new Map();
+      visibili.forEach((o) => {
+        const nome = String(o[gruppo.campo]).trim();
+        const chiave = nome.toLowerCase();
+        if (!gruppi.has(chiave)) gruppi.set(chiave, { nome, opere: [] });
+        gruppi.get(chiave).opere.push(o);
+      });
+      visibili = [];
+      let k = 0;
+      gruppi.forEach((g, chiave) => {
+        const titolo = document.createElement("h3");
+        titolo.className = "gruppo-titolo";
+        titolo.id = `collezione-${slug(chiave)}`;
+        titolo.innerHTML = `<span class="gruppo-etichetta">${esc(gruppo.etichetta || gruppo.nome)}</span><span class="gruppo-nome">${esc(g.nome)}</span><span class="conta">${g.opere.length} ${g.opere.length === 1 ? "opera" : "opere"}</span>`;
+        if (anima) {
+          titolo.classList.add("appare");
+          titolo.style.setProperty("--ritardo", `${ritardoBase + Math.min(k, 8) * 0.07}s`);
+        }
+        griglia.append(titolo);
+        g.opere.forEach((o) => {
+          visibili.push(o);
+          griglia.append(schedaOpera(o, k, anima, ritardoBase));
+          k += 1;
+        });
+      });
+    } else if (!visibili.length) {
       griglia.innerHTML =
         filtro === "tutte"
           ? `<p class="vuoto">Le opere saranno pubblicate a breve.</p>`
@@ -1575,7 +1623,7 @@
     void info.offsetWidth; // fa ripartire l'animazione dei testi
     info.classList.add("is-nuova");
     $("#scheda-titolo").innerHTML = `<em>${esc(o.titolo)}</em>`;
-    $("#scheda-meta").innerHTML = [o.anno, o.tecnica, o.misure, o.edizione]
+    $("#scheda-meta").innerHTML = [o.collezione ? `Collezione ${o.collezione}` : "", o.anno, o.tecnica, o.misure, o.edizione]
       .filter(Boolean)
       .map((x) => `<span>${esc(x)}</span>`)
       .join("");
@@ -2598,7 +2646,7 @@
 
   // Nastro delle categorie: tutte quelle del menu, ripetute quanto basta a riempire lo schermo
   function costruisciNastro() {
-    const voci = CATEGORIE.map((c, n) => ({ ...c, quante: conta(c.id), pigmento: PIGMENTI[n % PIGMENTI.length] }));
+    const voci = VOCI_CATEGORIE.map((c) => ({ ...c, quante: conta(c.id), pigmento: pigmentoDi(c.id) }));
     if (!voci.length) return;
 
     // Davanti: le categorie, ripetute finché la fascia è piena
@@ -2794,7 +2842,7 @@
       const a = e.target.closest(".nastro-voce");
       if (!a || a === attiva) return;
       attiva = a;
-      const lista = OPERE.filter((o) => o.categoria === a.dataset.categoria).slice(0, 6);
+      const lista = opereDi(a.dataset.categoria).slice(0, 6);
       clearInterval(timer);
       if (!lista.length) {
         anteprima.classList.remove("visibile");
