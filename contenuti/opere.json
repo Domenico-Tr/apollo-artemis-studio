@@ -1,149 +1,62 @@
 [
   {
     "titolo": "Il carro del Sole",
-    "immagine": "",
     "categoria": "Quadri",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Olio e foglia d'oro su tela",
     "misure": "100 × 80 cm",
-    "edizione": "",
     "descrizione": "Apollo attraversa il cielo e scende verso il mare. Il disco è in foglia d'oro, posata a mano un quadrato alla volta.",
     "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": true,
-    "id": "carro-del-sole",
-    "segnaposto": {
-      "stile": "sole",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#1B2D4F",
-        "#C9704A",
-        "#E9C46A",
-        "#1E3550"
-      ]
-    }
+    "inEvidenza": true
   },
   {
-    "titolo": "Artemide nel bosco",
-    "immagine": "",
+    "titolo": "Il prezzo della tela",
+    "immagine": "/img/quadro_compresso_500kb.jpg",
     "categoria": "Quadri",
-    "collezione": "I gemelli di Delo",
-    "anno": 2024,
+    "collezione": "I Miti nel Presente: Specchi dell'Anima Contemporanea",
+    "anno": 2026,
     "tecnica": "Acrilico su tela",
-    "misure": "70 × 50 cm",
-    "edizione": "",
-    "descrizione": "La falce di luna sopra un bosco di cipressi: l'ora in cui Artemide esce a cacciare.",
-    "stato": "Riservata",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "artemide-nel-bosco",
-    "segnaposto": {
-      "stile": "luna",
-      "proporzione": [
-        5,
-        7
-      ],
-      "colori": [
-        "#0C1430",
-        "#24305A",
-        "#E3E9F4",
-        "#0B1A16"
-      ]
-    }
+    "misure": "40 × 30 cm",
+    "descrizione": "|l mito di Aracne illustra come la violenza sulle donne possa manifestarsi anche per mano di un'altra figura femminile detentrice al potere. Aracne, straordinaria tessitrice mortale, sfida la dea Atena in una gara d'arte, realizzando una tela perfetta che denuncia gli abusi degli dèi. Accecata dall'invidia e dell'orgoglio ferito, Atena rifiuta il talento della rivale: distrugge l'opera e la aggredisce. La dea esercita una prevaricazione spietata che spinge la giovane alla disperazione. Quando Aracne tenta il suicidio per la vergogna, Atena le nega persino la pace della morte, trasformandola in un ragno e condannandola a tessere per  l'eternità in un tormento perpetuo.",
+    "stato": "Disponibile",
+    "inEvidenza": false
   },
   {
     "titolo": "Selene",
-    "immagine": "",
     "categoria": "Quadri",
     "collezione": "I gemelli di Delo",
     "anno": 2025,
     "tecnica": "Olio su tela",
     "misure": "80 × 60 cm",
-    "edizione": "",
     "descrizione": "La falce di Selene sopra il bosco sacro di Delo, in viola e argento. Risponde al sole del Carro: lo stesso orizzonte, di notte.",
     "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "selene",
-    "segnaposto": {
-      "stile": "luna",
-      "proporzione": [
-        3,
-        4
-      ],
-      "colori": [
-        "#1A1838",
-        "#4B3F6E",
-        "#F1EEE4",
-        "#14121F"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Delo all'alba",
-    "immagine": "",
     "categoria": "Quadri",
     "collezione": "Affreschi del mito",
     "anno": 2025,
     "tecnica": "Tempera e foglia d'oro su tavola",
     "misure": "60 × 60 cm",
-    "edizione": "",
     "descrizione": "Un pannello alla maniera degli affreschi pompeiani: la corona d'alloro di Apollo intorno al primo sole sull'isola dove nacquero i gemelli.",
     "stato": "Venduta",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "delo-alba",
-    "segnaposto": {
-      "stile": "affresco",
-      "proporzione": [
-        1,
-        1
-      ],
-      "colori": [
-        "#9E3B2E",
-        "#E8DCC2",
-        "#56703F",
-        "#1C1814"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "La corona di Dafne",
-    "immagine": "",
     "categoria": "Quadri",
     "collezione": "Affreschi del mito",
     "anno": 2026,
     "tecnica": "Tempera su tavola preparata a gesso",
     "misure": "50 × 50 cm",
-    "edizione": "",
     "descrizione": "La ninfa che si trasformò in alloro per sfuggire ad Apollo: la sua corona su un fondo ocra, come una parete di Ercolano.",
     "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "corona-dafne",
-    "segnaposto": {
-      "stile": "affresco",
-      "proporzione": [
-        1,
-        1
-      ],
-      "colori": [
-        "#B7802F",
-        "#EFE4CC",
-        "#3F5E33",
-        "#2A1F14"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Costellazione della Lira",
-    "immagine": "",
     "categoria": "Stampe",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Acquaforte e acquatinta su carta Hahnemühle",
     "misure": "40 × 30 cm",
@@ -151,29 +64,11 @@
     "descrizione": "La lira di Apollo tra le stelle, incisa su lastra di rame e stampata al torchio. Numerata e firmata a matita.",
     "stato": "Disponibile",
     "prezzo": "260 €",
-    "inEvidenza": false,
-    "id": "costellazione-lira",
-    "segnaposto": {
-      "stile": "costellazione",
-      "figura": "lira",
-      "nome": "Lyra",
-      "tiratura": "3/12",
-      "proporzione": [
-        3,
-        4
-      ],
-      "colori": [
-        "#F3F0E8",
-        "#1D2B4F",
-        "#D9B25A"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Orione il cacciatore",
-    "immagine": "",
     "categoria": "Stampe",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Acquaforte e acquatinta su carta Hahnemühle",
     "misure": "40 × 30 cm",
@@ -181,29 +76,11 @@
     "descrizione": "Il compagno di caccia di Artemide, portato in cielo dopo la sua morte. Seconda lastra della serie Costellazioni.",
     "stato": "Disponibile",
     "prezzo": "260 €",
-    "inEvidenza": false,
-    "id": "orione",
-    "segnaposto": {
-      "stile": "costellazione",
-      "figura": "orione",
-      "nome": "Orion",
-      "tiratura": "5/12",
-      "proporzione": [
-        3,
-        4
-      ],
-      "colori": [
-        "#F2EFE9",
-        "#2A1E3D",
-        "#C3CEDF"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Raggi di Febo",
-    "immagine": "",
     "categoria": "Stampe",
-    "collezione": "",
     "anno": 2026,
     "tecnica": "Serigrafia a tre colori",
     "misure": "70 × 50 cm",
@@ -211,109 +88,44 @@
     "descrizione": "Tre passaggi di colore stampati a mano in studio. Numerata, firmata e con certificato di autenticità.",
     "stato": "Disponibile",
     "prezzo": "340 €",
-    "inEvidenza": false,
-    "id": "raggi-di-febo",
-    "segnaposto": {
-      "stile": "raggi",
-      "tiratura": "11/25",
-      "proporzione": [
-        5,
-        7
-      ],
-      "colori": [
-        "#EFE9DC",
-        "#E3A93B",
-        "#C9503E",
-        "#1E3A5F"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Anfora di Artemide",
-    "immagine": "",
     "categoria": "Ceramica",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Terracotta a figure nere",
     "misure": "h 38 cm",
-    "edizione": "",
     "descrizione": "Tornita e dipinta con la tecnica delle figure nere: sulla pancia la falce di luna e le stelle della notte di caccia.",
     "stato": "Disponibile",
     "prezzo": "480 €",
-    "inEvidenza": false,
-    "id": "anfora-artemide",
-    "segnaposto": {
-      "stile": "anfora",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#E2DDD2",
-        "#C46A3A",
-        "#1B1411"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Hydria di Delo",
-    "immagine": "",
     "categoria": "Ceramica",
-    "collezione": "",
     "anno": 2026,
     "tecnica": "Terracotta a figure rosse",
     "misure": "h 42 cm",
-    "edizione": "",
     "descrizione": "Il vaso per l'acqua della fonte, con le figure risparmiate nel colore della terracotta e il fondo smaltato di nero: la falce di Artemide tra le stelle.",
     "stato": "Disponibile",
     "prezzo": "520 €",
-    "inEvidenza": false,
-    "id": "hydria-delo",
-    "segnaposto": {
-      "stile": "anfora",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#E2DDD2",
-        "#1B1411",
-        "#C46A3A"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Kylix del Sole",
-    "immagine": "",
     "categoria": "Ceramica",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Ceramica a figure nere",
     "misure": "ø 28 cm",
-    "edizione": "",
     "descrizione": "Una coppa da vino come quelle dei simposi, con il sole nel tondo e il meandro intorno. Pezzo unico, adatto anche all'uso.",
     "stato": "Disponibile",
     "prezzo": "220 €",
-    "inEvidenza": false,
-    "id": "kylix-sole",
-    "segnaposto": {
-      "stile": "kylix",
-      "proporzione": [
-        1,
-        1
-      ],
-      "colori": [
-        "#3A3F4A",
-        "#C46A3A",
-        "#1B1411"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Foulard Meandro",
-    "immagine": "",
     "categoria": "Accessori artistici",
-    "collezione": "",
     "anno": 2026,
     "tecnica": "Seta stampata, orli cuciti a mano",
     "misure": "90 × 90 cm",
@@ -321,133 +133,47 @@
     "descrizione": "Il bordo a meandro e, al centro, il sole e la luna che si incontrano. Arriva in una scatola con la stampa del bozzetto.",
     "stato": "Disponibile",
     "prezzo": "160 €",
-    "inEvidenza": false,
-    "id": "foulard-meandro",
-    "segnaposto": {
-      "stile": "foulard",
-      "proporzione": [
-        1,
-        1
-      ],
-      "colori": [
-        "#F1EBDD",
-        "#1E3A5F",
-        "#D9B25A",
-        "#1E3A5F"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Taccuino d'alloro",
-    "immagine": "",
     "categoria": "Accessori artistici",
-    "collezione": "",
     "anno": 2026,
     "tecnica": "Copertina in lino con impressione in oro, 160 pagine",
     "misure": "21 × 15 cm",
-    "edizione": "",
     "descrizione": "Pagine bianche da 120 g e la corona d'alloro impressa a caldo. Ogni copertina è rifinita a mano.",
     "stato": "Disponibile",
     "prezzo": "42 €",
-    "inEvidenza": false,
-    "id": "taccuino-alloro",
-    "segnaposto": {
-      "stile": "taccuino",
-      "proporzione": [
-        1,
-        1
-      ],
-      "colori": [
-        "#D9D3C4",
-        "#24324F",
-        "#D9B25A",
-        "#A8323F"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Colonna di Delfi",
-    "immagine": "",
     "categoria": "Altro",
-    "collezione": "",
     "anno": 2024,
     "tecnica": "Marmo bianco di Carrara",
     "misure": "h 48 cm",
-    "edizione": "",
     "descrizione": "Una colonna ionica in scala ridotta, scolpita a mano e lucidata solo sulle volute.",
     "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "colonna-delfi",
-    "segnaposto": {
-      "stile": "scultura",
-      "forma": "colonna",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#3A3E48",
-        "#1C1F26",
-        "#E9E5DC"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Disco di Elio",
-    "immagine": "",
     "categoria": "Altro",
-    "collezione": "",
     "anno": 2025,
     "tecnica": "Bronzo a cera persa",
     "misure": "ø 34 cm",
-    "edizione": "",
     "descrizione": "Il sole a sedici raggi in rilievo, fuso in fonderia artistica e patinato a caldo. Esemplare unico.",
     "stato": "Venduta",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "disco-elio",
-    "segnaposto": {
-      "stile": "scultura",
-      "forma": "disco",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#E4E0D6",
-        "#B9B3A6",
-        "#000000",
-        "#9A6B2F"
-      ]
-    }
+    "inEvidenza": false
   },
   {
     "titolo": "Frammento di fregio",
-    "immagine": "",
     "categoria": "Altro",
-    "collezione": "",
     "anno": 2026,
     "tecnica": "Gesso patinato su base in ardesia",
     "misure": "30 × 42 cm",
-    "edizione": "",
     "descrizione": "Una lastra spezzata con il meandro e un ramo d'alloro, come un reperto ritrovato.",
     "stato": "Disponibile",
-    "prezzo": "",
-    "inEvidenza": false,
-    "id": "frammento-fregio",
-    "segnaposto": {
-      "stile": "scultura",
-      "forma": "frammento",
-      "proporzione": [
-        4,
-        5
-      ],
-      "colori": [
-        "#2F3340",
-        "#151820",
-        "#E6E1D6"
-      ]
-    }
+    "inEvidenza": false
   }
 ]
