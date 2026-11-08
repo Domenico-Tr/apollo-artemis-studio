@@ -3,8 +3,9 @@
     "titolo": "Esempio: video caricato dal pannello",
     "data": "2026-11-03",
     "video": "/video/esempio.mp4",
-    "descrizione": "Un file MP4 caricato dal pannello si guarda qui, senza uscire dal sito.",
-    "opera": "Il carro del Sole"
+    "link": "https://vm.tiktok.com/ZGdXDvHna/",
+    "copertina": "/video/Screenshot_20261108_213137_Gallery.jpg",
+    "opera": "Il mito di Ade e Persefone "
   },
   {
     "titolo": "Esempio: link a un reel di Instagram",
